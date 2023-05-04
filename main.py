@@ -1,51 +1,52 @@
-from kivymd.app import MDApp
-from kivymd.uix.screen import Screen
-from kivymd.uix.label import MDLabel
+from kivy.app import App
+from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
-#from kivymd.uix.textfield import MDTextField
-from kivymd.uix.button import MDRoundFlatButton, MDFillRoundFlatButton
-from kivy.core.window import Window
-import sqlite3
-from kivymd_extensions.akivymd.uix.onboarding import *  #для красивых переходов и множества красивых виджетов
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.image import Image
 
-Window.size = (250, 250)
-Window.title = 'MyApp'
-Window.clearcolor = (1, 0, 0, 1)    # установка цвета нового фона
+from kivy.core.window import Window
 
-class MyApp(MDApp):
-    def __init__(self):
-        super().__init__()
-        self.label = MDLabel(text = 'Рабочая тетрадь SQLite')
-        #self.input = TextInput(hint_text = 'SQLite commands...', multiline = True)
-        #self.button = MDRoundFlatButton(text = 'OK', on_release = self.text)#b2e6f0
-        self.board = AKOnboarding(orientation = 'vertical')
-        self.box = BoxLayout()
-        self.box.add_widget(self.label)
-        self.board.ids.carousel.add_widget(self.box)
-        self.board2 = BoxLayout()
-        #self.board2.add_widget(Image(source='SQLite.png'))
-        self.board.ids.carousel.add_widget(self.board2)
-        
-    def text(self, *args):
-        try:
-            connection = sqlite3.connect('sq.db')
-            cursor = connection.cursor()
-            cursor.executescript(self.input.text)
-            connection.commit()
-            cursor.close()
-            print('yes')
-        except Exception as e: print(e)
-      
-    def build(self):
-        screen = Screen()
-        #screen.add_widget(self.label)
-        #screen.add_widget(self.input)
-        #screen.add_widget(self.button)
-        screen.add_widget(self.board)
+# Глобальные настройки
+Window.size = (250, 200)
+Window.clearcolor = (255/255, 186/255, 3/255, 1)
+Window.title = "Конвертер"
 
-        return screen
-    
-if __name__ == '__main__':   
-    MyApp().run()
+
+class MyApp(App):
+	
+	# Создание всех виджетов (объектов)
+	def __init__(self):
+		super().__init__()
+		self.label = Label(text='Конвертер')
+		self.miles = Label(text='Мили')
+		self.metres = Label(text='Метры')
+		self.santimetres = Label(text='Сантиметры')
+		self.input_data = TextInput(hint_text='Введите значение (км)', multiline=False)
+		self.input_data.bind(text=self.on_text) # Добавляем обработчик события
+
+	# Получаем данные и производит их конвертацию
+	def on_text(self, *args):
+		data = self.input_data.text
+		if data.isnumeric():
+			self.miles.text = 'Мили: ' + str(float(data) * 0.62)
+			self.metres.text = 'Метры: ' + str(float(data) * 1000)
+			self.santimetres.text = 'Сантиметры: ' + str(float(data) * 100000)
+		else:
+			self.input_data.text = ''
+
+	# Основной метод для построения программы
+	def build(self):
+		# Все объекты будем помещать в один общий слой
+		box = BoxLayout(orientation='vertical')
+		box.add_widget(self.label)
+		box.add_widget(self.input_data)
+		box.add_widget(self.miles)
+		box.add_widget(self.metres)
+		box.add_widget(self.santimetres)
+
+		return box
+
+
+# Запуск проекта
+if __name__ == "__main__":
+	MyApp().run()
+
