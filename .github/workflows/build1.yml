@@ -8,11 +8,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - id: cleanupAgents
-        with: 
-          condition: always()
-          script: |
-              echo "Put your git cleaner here"
       - uses: actions/checkout@main
 
       # used to cache dependencies with a timeout
