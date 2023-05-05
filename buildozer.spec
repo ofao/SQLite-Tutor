@@ -37,7 +37,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy
+requirements = python3,kivy,sqlite3,kivymd,kivymd-extensions,kivymd-extensions.akivymd
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -64,17 +64,20 @@ orientation = portrait
 # author = © Copyright Info
 
 # change the major version of python used by the app
-osx.python_version = 3
+osx.python_version = 3.9
 
 # Kivy version to use
-osx.kivy_version = 1.9.1
+osx.kivy_version = 2.1.0
 
+osx.kivymd_version = 1.1.1
+osx.kivymd-extensions_version = 1.0.0
+osx.kivymd-extensions.akivymd_version = 1.2.6
 #
 # Android specific
 #
 
 # (bool) Indicate if the application should be fullscreen or not
-fullscreen = 0
+fullscreen = 1
 
 # (string) Presplash background color (for android toolchain)
 # Supported formats are: #RRGGBB #AARRGGBB or one of the following names:
@@ -101,10 +104,10 @@ fullscreen = 0
 #android.features = android.hardware.usb.host
 
 # (int) Target Android API, should be as high as possible.
-#android.api = 31
+android.api = 31
 
 # (int) Minimum API your APK / AAB will support.
-#android.minapi = 21
+android.minapi = 21
 
 # (int) Android SDK version to use
 #android.sdk = 20
