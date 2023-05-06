@@ -75,21 +75,21 @@ Builder.load_string("""
             circles_size: dp(15)
 
             MyAKOnboardingItem:
-                source: ""
+                source: "SQLite.png"
                 text:
                     "Это интерактивное учебное средство комплексного назначения, " \
                     "являющееся частью образовательного ресурса по дисциплине"
                 title:"Электронная рабочая тетрадь"
 
             MyAKOnboardingItem:
-                source: ""
+                source: "SQLite.png"
                 text:
                     "Это система управления базами данных (СУБД), которая не имеет " \
                     "сервера и позволяет хранить всю базу локально на одном устройстве"
                 title: "SQLite"
 
             MyAKOnboardingItem:
-                source: ""
+                source: "SQLite.png"
                 text:
                     "Поможет вам в изучении SQLite." \
                     "Желаем успехов!"
