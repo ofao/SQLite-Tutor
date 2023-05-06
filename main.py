@@ -75,7 +75,7 @@ Builder.load_string("""
             circles_size: dp(15)
 
             MyAKOnboardingItem:
-                source: "assets/slide_one_img.png"
+                source: "SQLite.png"
                 text:
                     "Lorem Ipsum is simply dummy text of the printing and " \
                     "typesetting industry. Lorem Ipsum has been the industry's " \
