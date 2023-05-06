@@ -75,27 +75,23 @@ Builder.load_string("""
             circles_size: dp(15)
 
             MyAKOnboardingItem:
-                source: "SQLite.png"
                 text:
-                    "Lorem Ipsum is simply dummy text of the printing and " \
-                    "typesetting industry. Lorem Ipsum has been the industry's " \
-                    "standard dummy text ever since the 1500s, when an unknown " \
-                    "printer took a galley of type and scrambled it to make a type specimen book"
-                title:"What is Lorem Ipsum?"
+                    "Это интерактивное учебное средство комплексного назначения, " \
+                    "являющееся частью образовательного ресурса по дисциплине"
+                title:"Электронная рабочая тетрадь"
 
             MyAKOnboardingItem:
                 source: "SQLite.png"
                 text:
-                    "It is a long established fact that a reader will be distracted " \
-                    "by the readable content of a page when looking at its layout."
-                title: "Why do we use it?"
+                    "Это система управления базами данных (СУБД), которая не имеет " \
+                    "сервера и позволяет хранить всю базу локально на одном устройстве"
+                title: "SQLite"
 
             MyAKOnboardingItem:
-                source: "SQLite.png"
                 text:
-                    "Contrary to popular belief, Lorem Ipsum is not simply random text. " \
-                    "It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-                title: "Where does it come from?"
+                    "Поможет вам в изучении SQLite." \
+                    "Желаем успехов!"
+                title: "Эта программа"
 """)
 
 class MyApp(MDApp):
@@ -125,11 +121,6 @@ class MyApp(MDApp):
         except Exception as e: print(e)
       
     def build(self):
-        #screen = Screen()
-        #screen.add_widget(self.label)
-        #screen.add_widget(self.input)
-        #screen.add_widget(self.button)
-        #screen.add_widget(self.board)
 
         return OnBoarding()
     
