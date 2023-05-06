@@ -75,18 +75,21 @@ Builder.load_string("""
             circles_size: dp(15)
 
             MyAKOnboardingItem:
+                source: ""
                 text:
                     "Это интерактивное учебное средство комплексного назначения, " \
                     "являющееся частью образовательного ресурса по дисциплине"
                 title:"Электронная рабочая тетрадь"
 
             MyAKOnboardingItem:
+                source: ""
                 text:
                     "Это система управления базами данных (СУБД), которая не имеет " \
                     "сервера и позволяет хранить всю базу локально на одном устройстве"
                 title: "SQLite"
 
             MyAKOnboardingItem:
+                source: ""
                 text:
                     "Поможет вам в изучении SQLite." \
                     "Желаем успехов!"
@@ -110,14 +113,7 @@ class MyApp(MDApp):
         self.board.ids.carousel.add_widget(self.board2)'''
         
     def text(self, *args):
-        try:
-            connection = sqlite3.connect('sq.db')
-            cursor = connection.cursor()
-            cursor.executescript(self.input.text)
-            connection.commit()
-            cursor.close()
-            print('yes')
-        except Exception as e: print(e)
+        pribt("yes")
       
     def build(self):
 
