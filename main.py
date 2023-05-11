@@ -17,7 +17,7 @@ class MyApp(MDApp):
         self.theme_cls.primary_palette = 'Blue'
 
         self.theme_cls.theme_style_switch_animation = True
-        self.theme_cls.theme_style_switch_animation_duration = 1
+        self.theme_cls.theme_style_switch_animation_duration = 0
         
         self.screen = Screen()
         self.label = MDLabel(text = 'Рабочая тетрадь SQLite')
@@ -33,9 +33,6 @@ class MyApp(MDApp):
             connection.close()
             self.theme_cls.theme_style = (
                 'Dark' if self.theme_cls.theme_style == 'Light' else 'Light')
-            try:
-                self.refresh_callback()
-            except: pass
         except Exception as e: print(e)
       
     def build(self):
