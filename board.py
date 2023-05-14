@@ -11,7 +11,7 @@ Builder.load_string("""
         Image:
             source: root.source
             pos_hint: {"center_x": .5, "y": .6}
-            size_hint: .4, .3
+            size_hint: .5, .4
 
         MDBoxLayout:
             orientation: "vertical"
@@ -21,19 +21,13 @@ Builder.load_string("""
             spacing: dp(20)
             size_hint_x: .7
 
-            canvas.before:
-                Color:
-                    rgba: app.theme_cls.primary_dark
-                RoundedRectangle:
-                    pos: self.pos
-                    size: self.size
-
             MDLabel:
                 text: root.title
                 bold: True
                 size_hint_y: None
                 height: self.texture_size[1]
-                theme_text_color: "Primary"
+                theme_text_color: "Custom"
+                text_color: app.theme_cls.text_color
                 font_style: "H6"
                 halign: "center"
                 valign: "center"
@@ -41,7 +35,8 @@ Builder.load_string("""
             MDLabel:
                 size_hint_y: None
                 height: self.texture_size[1]
-                theme_text_color: "Primary"
+                theme_text_color: "Custom"
+                text_color: app.theme_cls.text_color
                 font_style: "Body1"
                 halign: "center"
                 valign: "center"
@@ -62,6 +57,7 @@ Builder.load_string("""
             circles_size: dp(15)
 
             MyAKOnboardingItem:
+                source: 'desk.png'
                 text:
                     "Это интерактивное учебное средство комплексного назначения, " \
                     "являющееся частью образовательного ресурса по дисциплине"
@@ -74,11 +70,57 @@ Builder.load_string("""
                     "сервера и позволяет хранить всю базу локально на одном устройстве"
                 title: "SQLite"
 
-            MyAKOnboardingItem:
-                text:
-                    "Поможет вам в изучении SQLite." \
-                    "Желаем успехов!"
-                title: "Эта программа"
+            AKOnboardingItem:
+                MDFloatLayout:
+                    Image:
+                        source: 'dark2light.png'
+                        pos_hint: {"center_x": .5, "y": .6}
+                        size_hint: .5, .4
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: dp(10)
+                        adaptive_height: True
+                        pos_hint: {"center_x": .5, "top": .5}
+                        spacing: dp(20)
+                        size_hint_x: .7
+
+                        MDLabel:
+                            text: 'Выберите тему приложения'
+                            bold: True
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            theme_text_color: "Custom"
+                            text_color: app.theme_cls.text_color
+                            font_style: "H6"
+                            halign: "center"
+                            valign: "center"
+                            
+                        MDRoundFlatButton:
+                            text: 'Поменять'
+                            size_hint: None, None
+                            pos_hint: {'center_x': .5}
+                            on_release: root.change_theme()
+
+<MD3Card@MDCard>
+    padding: 4
+    size_hint: None, None
+    size: "200dp", "100dp"
+
+    MDRelativeLayout:
+
+        MDIconButton:
+            icon: "dots-vertical"
+            pos_hint: {"top": 1, "right": 1}
+
+        MDLabel:
+            id: label
+            text: 'i love Timka'
+            adaptive_size: True
+            color: "grey"
+            pos: "12dp", "12dp"
+            bold: True
+
 """)
         
 
