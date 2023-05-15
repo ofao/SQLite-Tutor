@@ -96,30 +96,36 @@ Builder.load_string("""
                             halign: "center"
                             valign: "center"
                             
-                        MDRoundFlatButton:
-                            text: 'Поменять'
+                        MDIconButton:
+                            icon: 'weather-night' if app.theme_cls.theme_style=='Dark' else 'weather-sunny'
+                            icon_size: '64sp'
+                            theme_icon_color: "Custom"
+                            icon_color: app.theme_cls.text_color
                             size_hint: None, None
                             pos_hint: {'center_x': .5}
                             on_release: root.change_theme()
-
-<MD3Card@MDCard>
+                              
+            
+<MD3Card>
     padding: 4
     size_hint: None, None
     size: "200dp", "100dp"
 
     MDRelativeLayout:
-
+    
         MDIconButton:
-            icon: "dots-vertical"
+            icon: "arrow-right-thick"
             pos_hint: {"top": 1, "right": 1}
+            on_release: root.change_widget()
 
         MDLabel:
             id: label
-            text: 'i love Timka'
+            text: root.text
             adaptive_size: True
             color: "grey"
             pos: "12dp", "12dp"
             bold: True
+
 
 """)
         
