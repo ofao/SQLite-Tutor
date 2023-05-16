@@ -52,7 +52,13 @@ class Onboarding(MDScreen):
         myapp.screen.remove_widget(self)
         with open('data.pickle', 'wb') as f:
             obuch_passed = True
-        self.screen.add_widget(BoxLayout().add_widget(MD3Card()))
+        card1 = MD3Card(text = 'Реляционная алгебра')
+        card2 = MD3Card(text = 'Тимка любимая попка')
+        card3 = MD3Card(text = 'Я тебя люблюююю\nмилый')
+        myapp.box.add_widget(card1)
+        myapp.box.add_widget(card2)
+        myapp.box.add_widget(card3)
+        myapp.screen.add_widget(myapp.box)
         
     def change_theme(self):
         myapp.theme_cls.theme_style = (
