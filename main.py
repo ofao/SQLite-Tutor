@@ -52,6 +52,7 @@ class Onboarding(MDScreen):
         myapp.screen.remove_widget(self)
         with open('data.pickle', 'wb') as f:
             obuch_passed = True
+            pickle.dump(obuch_passed, f)
         card1 = MD3Card(text = 'Реляционная алгебра')
         card2 = MD3Card(text = 'Тимка любимая попка')
         card3 = MD3Card(text = 'Я тебя люблюююю\nмилый')
