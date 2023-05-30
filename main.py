@@ -14,9 +14,9 @@ from kivymd.uix.expansionpanel import MDExpansionPanel, MDExpansionPanelOneLine
 from kivymd.uix.list import OneLineListItem
 from kivy.uix.scrollview import ScrollView
 # add this at the top of your code
-from kivy.config import Config
+#from kivy.config import Config
 
-Config.set('kivy', 'window_icon', 'database.png')
+#Config.set('kivy', 'window_icon', 'database.png')
 
 class MyApp(MDApp):
     def __init__(self):
@@ -82,11 +82,11 @@ class MyApp(MDApp):
         box = MDBoxLayout(orientation = 'vertical', padding = 10, spacing = 10,
                           adaptive_height = True)
         for i in range(self.num):
-            box.add_widget(OneLineListItem(text = self.text[i], on_release = self.panel_open))
+            box.add_widget(OneLineListItem(text = self.text[i]))
         return box
        
-    def panel_open(self, i):
-        print(i)
+    def panel_open(self):
+        print(1)
 
     def panel_close(self):
         print(1)
