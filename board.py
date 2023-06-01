@@ -133,20 +133,5 @@ Builder.load_string("""
             bold: True
 
 """)
-'''
-<Content>
-    orientation: "vertical"
-    padding: dp(10)
-    spacing: dp(10)
-    adaptive_height: True
-    size: "400dp", "100dp"
-    OneLineIconListItem:
-        text: root.text[0]
-        on_release: root.change_widget()
-        
-        IconLeftWidget:
-            icon: "arrow-right-thick"
-            on_release: root.change_widget()
-'''
        
 
