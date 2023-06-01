@@ -28,8 +28,8 @@ class MyApp(MDApp):
         self.label = MDLabel(text = 'Рабочая тетрадь SQLite')
         #self.input = TextInput(hint_text = 'SQLite commands...', multiline = True)
         #b2e6f0
-        #self.box = MDGridLayout(adaptive_width = True, cols = 2, pos_hint = {'top': 1})
-        self.box = MDBoxLayout(orientation = 'vertical', adaptive_height = True, spacing = 20, width = 800)
+        self.box = MDGridLayout(adaptive_width = True, cols = 2, pos_hint = {'top': 1})
+        #self.box = MDBoxLayout(orientation = 'vertical', adaptive_height = True, spacing = 20, width = 800)
         self.scroll = ScrollView(bar_width = 10)
 
     def on_text(self, *args):
@@ -61,8 +61,9 @@ class MyApp(MDApp):
                 a = line.split(' (')[1][:-2]
                 lesson.append(a.split(', '))
         for i in range(len(title)):
-            #card = MD3Card(text = title[i])
-            #self.box.add_widget(card)
+            card = MD3Card(text = title[i])
+            self.box.add_widget(card)
+            '''
             self.text = lesson[i]
             self.num = len(lesson[i])
             panel = MDExpansionPanel(
@@ -72,8 +73,8 @@ class MyApp(MDApp):
                 panel_cls = MDExpansionPanelOneLine(text = title[i]))
             self.box.add_widget(panel)
         self.scroll.add_widget(self.box)
-        self.screen.add_widget(self.scroll)
-        #self.screen.add_widget(self.box)
+        self.screen.add_widget(self.scroll)'''
+        self.screen.add_widget(self.box)
         return self.screen
     
     def append(self):
