@@ -55,7 +55,7 @@ class MyApp(MDApp):
 
     def cards(self):
         title, lesson = [], []
-        with open('темы.txt', 'r', encoding = 'ANSI') as f:
+        with open('темы.txt', 'r', encoding = 'utf8') as f:
             for line in f:
                 title.append(line.split(' (')[0])
                 a = line.split(' (')[1][:-2]
