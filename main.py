@@ -50,7 +50,7 @@ class MyApp(MDApp):
                 a = line.split(' (')[1][:-2]
                 lesson.append(a.split(', '))'''
         for i in range(10):
-            card = MD3Card("Я люблю Тимку")
+            card = MD3Card(text = "Я люблю Тимку")
             self.box.add_widget(card)
             '''
             self.text = lesson[i]
