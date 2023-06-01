@@ -5,7 +5,7 @@ from kivy.uix.textinput import TextInput
 #from kivymd.uix.button import MDFlatButton
 #from kivymd.uix.textfield import MDTextField
 from kivymd.uix.card import MDCard
-import sqlite3, pickle
+import sqlite3
 from board import *  #введение
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.gridlayout import MDGridLayout
@@ -13,9 +13,6 @@ from kivymd.uix.expansionpanel import MDExpansionPanel, MDExpansionPanelOneLine
 #from kivy.uix.image import Image
 from kivymd.uix.list import OneLineListItem
 from kivy.uix.scrollview import ScrollView
-
-#from kivy.config import Config
-#Config.set('kivy', 'window_icon', 'database.png')
 
 class MyApp(MDApp):
     def __init__(self):
@@ -31,23 +28,14 @@ class MyApp(MDApp):
         self.box = MDGridLayout(adaptive_width = True, cols = 2, pos_hint = {'top': 1})
         #self.box = MDBoxLayout(orientation = 'vertical', adaptive_height = True, spacing = 20, width = 800)
         self.scroll = ScrollView(bar_width = 10)
-
-    def on_text(self, *args):
-        try:
-            connection = sqlite3.connect('sq.db')
-            cursor = connection.cursor()
-            cursor.close()
-            connection.close()  
-        except Exception as e: print(e)
       
     def build(self):
         #self.icon = 'database.png'
-        #create_file
-        with open('data.pickle', 'rb') as f:
-            obuch_passed = pickle.load(f)
-            theme = pickle.load(f)
-        self.theme_cls.theme_style = theme
-        if obuch_passed == False:
+        cursor.execute('SELECT Значение from DATA where Тип="Обучение"')
+        obuch_passed = cursor.fetchone()[0]
+        cursor.execute('SELECT Значение from DATA where Тип="Тема"')
+        self.theme_cls.theme_style = cursor.fetchone()[0]
+        if obuch_passed == 'False':
             self.screen.add_widget(Onboarding())
         else:
             self.cards()
@@ -93,11 +81,12 @@ class MyApp(MDApp):
 class Onboarding(MDScreen):
     def finish_callback(self):
         myapp.screen.clear_widgets()
-        with open('data.pickle', 'wb') as f:
-            obuch_passed = True
-            pickle.dump(obuch_passed, f)
-            theme = myapp.theme_cls.theme_style
-            pickle.dump(theme, f)
+        cursor.execute('UPDATE DATA set Значение="True" where Тип="Обучение"')
+        if myapp.theme_cls.theme_style == 'Dark':
+            cursor.execute('UPDATE DATA set Значение="Dark" where Тип="Тема"')
+        else:
+            cursor.execute('UPDATE DATA set Значение="Light" where Тип="Тема"')
+        connection.commit()
         myapp.cards()
         
     def change_theme(self):
@@ -112,6 +101,10 @@ class MD3Card(MDCard):
     
 if __name__ == '__main__':
     myapp = MyApp()
+    connection = sqlite3.connect('sq.db')
+    cursor = connection.cursor()
     myapp.run()
+    cursor.close()
+    connection.close() 
 
 
