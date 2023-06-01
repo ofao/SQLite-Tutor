@@ -43,13 +43,14 @@ class MyApp(MDApp):
 
     def cards(self):
         title, lesson = [], []
+        '''
         with open('темы.txt', 'r', encoding = 'utf8') as f:
             for line in f:
                 title.append(line.split(' (')[0])
                 a = line.split(' (')[1][:-2]
-                lesson.append(a.split(', '))
-        for i in range(len(title)):
-            card = MD3Card(text = title[i])
+                lesson.append(a.split(', '))'''
+        for i in range(10):
+            card = MD3Card("Я люблю Тимку")
             self.box.add_widget(card)
             '''
             self.text = lesson[i]
