@@ -10,7 +10,7 @@ from board import *  #введение
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.gridlayout import MDGridLayout
 from kivymd.uix.expansionpanel import MDExpansionPanel, MDExpansionPanelOneLine
-#from kivy.uix.image import Image
+from kivy.uix.image import Image
 from kivymd.uix.list import OneLineListItem
 from kivy.uix.scrollview import ScrollView
 
