@@ -12,7 +12,7 @@ from kivy.uix.textinput import TextInput
 
 from kivymd.uix.card import MDCard
 
-import sqlite3, random
+import sqlite3
 
 from board import *  #введение
 
@@ -64,7 +64,7 @@ class MyApp(MDApp):
 
     def build(self):
 
-        i = random.randint(0, 1)
+        i = 2
         if i == 1:
 
             self.screen.add_widget(Onboarding())
