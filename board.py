@@ -109,16 +109,10 @@ Builder.load_string("""
 <MD3Card>
     padding: 4
     size_hint: None, None
-    size: "400dp", "100dp"
+    size: "200dp", "100dp"
 
     MDRelativeLayout:
-        canvas:
-            Color:
-                rgba: [0, 0, 0, 0.1]
-            RoundedRectangle:
-                pos: (0, 0)
-                size: self.size
-        
+    
         MDIconButton:
             icon: "arrow-right-thick"
             pos_hint: {"top": 1, "right": 1}
@@ -128,10 +122,10 @@ Builder.load_string("""
             id: label
             text: root.text
             adaptive_size: True
-            color: "black"     ##если раздел пройден, то grey
+            color: "grey"
             pos: "12dp", "12dp"
             bold: True
 
-""")
-       
 
+""")
+        
