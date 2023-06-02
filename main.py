@@ -30,7 +30,7 @@ class MyApp(MDApp):
         self.scroll = ScrollView(bar_width = 10)
       
     def build(self):
-        global cursor
+        global cursor, connection
         #self.icon = 'database.png'
         cursor.execute('SELECT Значение from DATA where Тип="Обучение"')
         connection.commit()
@@ -51,11 +51,7 @@ class MyApp(MDApp):
             for line in f:
                 title.append(line.split(' (')[0])
                 a = line.split(' (')[1][:-2]
-                lesson.append(a.split(', '))'''
-        for i in range(10):
-            card = MD3Card(text = "Я люблю Тимку")
-            self.box.add_widget(card)
-            '''
+                lesson.append(a.split(', '))
             self.text = lesson[i]
             self.num = len(lesson[i])
             panel = MDExpansionPanel(
@@ -66,6 +62,8 @@ class MyApp(MDApp):
             self.box.add_widget(panel)
         self.scroll.add_widget(self.box)
         self.screen.add_widget(self.scroll)'''
+        card = MD3Card(text = "Я люблю Тимку")
+        self.box.add_widget(card)
         self.screen.add_widget(self.box)
         return self.screen
     
@@ -84,7 +82,7 @@ class MyApp(MDApp):
         
 class Onboarding(MDScreen):
     def finish_callback(self):
-        global cursor
+        global cursor, connection
         myapp.screen.clear_widgets()
         cursor.execute('UPDATE DATA set Значение="True" where Тип="Обучение"')
         if myapp.theme_cls.theme_style == 'Dark':
