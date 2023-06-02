@@ -30,10 +30,13 @@ class MyApp(MDApp):
         self.scroll = ScrollView(bar_width = 10)
       
     def build(self):
+        global cursor
         #self.icon = 'database.png'
         cursor.execute('SELECT Значение from DATA where Тип="Обучение"')
+        connection.commit()
         obuch_passed = cursor.fetchone()[0]
         cursor.execute('SELECT Значение from DATA where Тип="Тема"')
+        connection.commit()
         self.theme_cls.theme_style = cursor.fetchone()[0]
         if obuch_passed == 'False':
             self.screen.add_widget(Onboarding())
@@ -81,6 +84,7 @@ class MyApp(MDApp):
         
 class Onboarding(MDScreen):
     def finish_callback(self):
+        global cursor
         myapp.screen.clear_widgets()
         cursor.execute('UPDATE DATA set Значение="True" where Тип="Обучение"')
         if myapp.theme_cls.theme_style == 'Dark':
