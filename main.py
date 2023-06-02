@@ -5,7 +5,7 @@ from kivy.uix.textinput import TextInput
 #from kivymd.uix.button import MDFlatButton
 #from kivymd.uix.textfield import MDTextField
 from kivymd.uix.card import MDCard
-import sqlite3, pickle
+import sqlite3
 from board import *  #введение
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivy.uix.image import Image
