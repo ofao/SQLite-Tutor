@@ -23,49 +23,11 @@ class MyApp(MDApp):
         #self.input = TextInput(hint_text = 'SQLite commands...', multiline = True)
         #b2e6f0
         self.box = MDBoxLayout(adaptive_size = True, spacing = 15, pos_hint = {'top': 1})
-    def on_text(self, *args):
-        try:
-            connection = sqlite3.connect('sq.db')
-            cursor = connection.cursor()
-            cursor.close()
-            connection.close()
-            
-        except Exception as e: print(e)
       
     def build(self):
-        obuch_passed = True
-        if obuch_passed == False:
-            self.screen.add_widget(Onboarding())
-        else:
-            card1 = MD3Card(text = 'Реляционная алгебра')
-            card2 = MD3Card(text = 'Тимка любимая попка')
-            card3 = MD3Card(text = 'Я тебя люблюююю\nмилый')
-            self.box.add_widget(card1)
-            self.box.add_widget(card2)
-            self.box.add_widget(card3)
-            self.screen.add_widget(self.box)
+        self.screen.add_widget(self.label)
         return self.screen
     
-class Onboarding(MDScreen):
-    def finish_callback(self):
-        myapp.screen.remove_widget(self)
-        card1 = MD3Card(text = 'Реляционная алгебра')
-        card2 = MD3Card(text = 'Тимка любимая попка')
-        card3 = MD3Card(text = 'Я тебя люблюююю\nмилый')
-        myapp.box.add_widget(card1)
-        myapp.box.add_widget(card2)
-        myapp.box.add_widget(card3)
-        myapp.screen.add_widget(myapp.box)
-        
-    def change_theme(self):
-        myapp.theme_cls.theme_style = (
-                'Dark' if myapp.theme_cls.theme_style == 'Light' else 'Light')
-
-class MD3Card(MDCard):
-    text = StringProperty()
-
-    def change_widget(self):
-        pass
 if __name__ == '__main__':
     myapp = MyApp()
     myapp.run()
