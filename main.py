@@ -41,7 +41,9 @@ class MyApp(MDApp):
         if obuch_passed == 'False':
             self.screen.add_widget(Onboarding())
         else:
-            self.cards()
+            card = MD3Card(text = "Я люблю Тимку")
+            self.box.add_widget(card)
+            self.screen.add_widget(self.box)
         return self.screen
 
     def cards(self):
@@ -90,7 +92,9 @@ class Onboarding(MDScreen):
         else:
             cursor.execute('UPDATE DATA set Значение="Light" where Тип="Тема"')
         connection.commit()
-        myapp.cards()
+        card = MD3Card(text = "Я люблю Тимку")
+        myapp.box.add_widget(card)
+        myapp.screen.add_widget(myapp.box)
         
     def change_theme(self):
         myapp.theme_cls.theme_style = (
