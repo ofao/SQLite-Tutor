@@ -1,117 +1,136 @@
 from kivymd.app import MDApp
+
 from kivymd.uix.screen import Screen
+
 from kivymd.uix.label import MDLabel
+
 from kivy.uix.textinput import TextInput
+
 #from kivymd.uix.button import MDFlatButton
+
 #from kivymd.uix.textfield import MDTextField
+
 from kivymd.uix.card import MDCard
-import sqlite3
+
+import sqlite3, random
+
 from board import *  #введение
+
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.gridlayout import MDGridLayout
-from kivymd.uix.expansionpanel import MDExpansionPanel, MDExpansionPanelOneLine
+
 from kivy.uix.image import Image
-from kivymd.uix.list import OneLineListItem
-from kivy.uix.scrollview import ScrollView
 
 class MyApp(MDApp):
+
     def __init__(self):
+
         super().__init__()
+
         self.theme_cls.theme_style = 'Dark'
+
         self.theme_cls.primary_palette = 'Blue'
+
         self.theme_cls.theme_style_switch_animation = True
+
         
+
         self.screen = Screen()
+
         self.label = MDLabel(text = 'Рабочая тетрадь SQLite')
+
         #self.input = TextInput(hint_text = 'SQLite commands...', multiline = True)
+
         #b2e6f0
-        self.box = MDGridLayout(adaptive_width = True, cols = 2, pos_hint = {'top': 1})
-        #self.box = MDBoxLayout(orientation = 'vertical', adaptive_height = True, spacing = 20, width = 800)
-        self.scroll = ScrollView(bar_width = 10)
+
+        self.box = MDBoxLayout(adaptive_size = True, spacing = 15, pos_hint = {'top': 1})
+
+    def on_text(self, *args):
+
+        try:
+
+            connection = sqlite3.connect('sq.db')
+
+            cursor = connection.cursor()
+
+            cursor.close()
+
+            connection.close()
+
+            
+
+        except Exception as e: print(e)
+
       
+
     def build(self):
-        global cursor, connection
-        #self.icon = 'database.png'
-        cursor.execute('SELECT Значение from DATA where Тип="Обучение"')
-        connection.commit()
-        obuch_passed = cursor.fetchone()[0]
-        cursor.execute('SELECT Значение from DATA where Тип="Тема"')
-        connection.commit()
-        self.theme_cls.theme_style = cursor.fetchone()[0]
-        if obuch_passed == 'False':
+
+        i = random.randint(0, 1)
+        if i == 1:
+
             self.screen.add_widget(Onboarding())
+
         else:
-            card = MD3Card(text = "Я люблю Тимку")
-            self.box.add_widget(card)
+
+            card1 = MD3Card(text = 'Реляционная алгебра')
+
+            card2 = MD3Card(text = 'Тимка любимая попка')
+
+            card3 = MD3Card(text = 'Я тебя люблюююю\nмилый')
+
+            self.box.add_widget(card1)
+
+            self.box.add_widget(card2)
+
+            self.box.add_widget(card3)
+
             self.screen.add_widget(self.box)
+
         return self.screen
 
-    def cards(self):
-        title, lesson = [], []
-        '''
-        with open('темы.txt', 'r', encoding = 'utf8') as f:
-            for line in f:
-                title.append(line.split(' (')[0])
-                a = line.split(' (')[1][:-2]
-                lesson.append(a.split(', '))
-            self.text = lesson[i]
-            self.num = len(lesson[i])
-            panel = MDExpansionPanel(
-                on_open = self.panel_open,
-                on_close = self.panel_close,
-                content = self.append(),
-                panel_cls = MDExpansionPanelOneLine(text = title[i]))
-            self.box.add_widget(panel)
-        self.scroll.add_widget(self.box)
-        self.screen.add_widget(self.scroll)'''
-        card = MD3Card(text = "Я люблю Тимку")
-        self.box.add_widget(card)
-        self.screen.add_widget(self.box)
-        return self.screen
     
-    def append(self):
-        box = MDBoxLayout(orientation = 'vertical', padding = 10, spacing = 10,
-                          adaptive_height = True)
-        for i in range(self.num):
-            box.add_widget(OneLineListItem(text = self.text[i], on_release = self.panel_open))
-        return box
-       
-    def panel_open(self, i):
-        pass
 
-    def panel_close(self, i):
-        pass
-        
 class Onboarding(MDScreen):
+
     def finish_callback(self):
-        global cursor, connection
-        myapp.screen.clear_widgets()
-        cursor.execute('UPDATE DATA set Значение="True" where Тип="Обучение"')
-        if myapp.theme_cls.theme_style == 'Dark':
-            cursor.execute('UPDATE DATA set Значение="Dark" where Тип="Тема"')
-        else:
-            cursor.execute('UPDATE DATA set Значение="Light" where Тип="Тема"')
-        connection.commit()
-        card = MD3Card(text = "Я люблю Тимку")
-        myapp.box.add_widget(card)
+
+        myapp.screen.remove_widget(self)
+
+        card1 = MD3Card(text = 'Реляционная алгебра')
+
+        card2 = MD3Card(text = 'Тимка любимая попка')
+
+        card3 = MD3Card(text = 'Я тебя люблюююю\nмилый')
+
+        myapp.box.add_widget(card1)
+
+        myapp.box.add_widget(card2)
+
+        myapp.box.add_widget(card3)
+
         myapp.screen.add_widget(myapp.box)
+
         
+
     def change_theme(self):
+
         myapp.theme_cls.theme_style = (
+
                 'Dark' if myapp.theme_cls.theme_style == 'Light' else 'Light')
 
 class MD3Card(MDCard):
+
     text = StringProperty()
 
     def change_widget(self):
-        myapp.screen.clear_widgets()
-    
+
+        pass
+
 if __name__ == '__main__':
+
     myapp = MyApp()
-    connection = sqlite3.connect('sq.db')
-    cursor = connection.cursor()
+
     myapp.run()
-    cursor.close()
-    connection.close() 
+ 
+  
 
 
