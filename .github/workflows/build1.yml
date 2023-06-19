@@ -33,7 +33,7 @@ jobs:
         id: buildozer
         with:
           command: buildozer appclean
-          command: buildozer android debug
+          buildozer android debug
           buildozer_version: master
 
       - name: Upload artifacts
