@@ -1,5 +1,6 @@
 from kivymd_extensions.akivymd.uix.onboarding import *  #для красивых переходов и множества красивых виджетов
 from kivymd.uix.screen import MDScreen
+from kivymd import images_path
 Builder.load_string("""
 <MyAKOnboardingItem@AKOnboardingItem>
     source: ""
@@ -43,7 +44,7 @@ Builder.load_string("""
                 text: root.text
 
 
-<Onboarding>
+<Onboarding>:
     name: "Onboarding"
     on_leave: boarding.reset()
 
@@ -57,7 +58,7 @@ Builder.load_string("""
             circles_size: dp(15)
 
             MyAKOnboardingItem:
-                source: 'desk.png'
+                source: "desk.png"
                 text:
                     "Это интерактивное учебное средство комплексного назначения, " \
                     "являющееся частью образовательного ресурса по дисциплине"
@@ -73,7 +74,7 @@ Builder.load_string("""
             AKOnboardingItem:
                 MDFloatLayout:
                     Image:
-                        source: 'dark2light.png'
+                        source: "dark2light.png"
                         pos_hint: {"center_x": .5, "y": .6}
                         size_hint: .5, .4
 
@@ -86,7 +87,7 @@ Builder.load_string("""
                         size_hint_x: .7
 
                         MDLabel:
-                            text: 'Выберите тему приложения'
+                            text: "Выберите тему приложения"
                             bold: True
                             size_hint_y: None
                             height: self.texture_size[1]
@@ -104,29 +105,56 @@ Builder.load_string("""
                             size_hint: None, None
                             pos_hint: {'center_x': .5}
                             on_release: root.change_theme()
-                              
-            
-<MD3Card>
-    padding: 4
+
+<MD3Card>:
     size_hint: None, None
-    size: "200dp", "100dp"
+    size: "300dp", "300dp"
+    md_bg_color: [0, 0, 0, 0.1]
+    orientation: "vertical"
 
-    MDRelativeLayout:
-    
-        MDIconButton:
-            icon: "arrow-right-thick"
-            pos_hint: {"top": 1, "right": 1}
-            on_release: root.change_widget()
+    FitImage:
+        source: root.source
 
-        MDLabel:
-            id: label
-            text: root.text
-            adaptive_size: True
-            color: "grey"
-            pos: "12dp", "12dp"
-            bold: True
-
-
-""")
+    MDProgressBar:
+        size_hint_y: .1
+        value: root.value
         
+<TextInp>:
+    size_hint: 1, None
+
+    ScrollView:
+        bar_width: 10
+        bar_color: [0, 0, 255, 0.3]
+        size_hint: 1, None
+        pos_hint: {'center': 1}
+        scroll_type: ["bars"]
+        padding: 10
+        id: scr
+        
+        TextInput:
+            text: root.text
+            multiline: True
+            size_hint: 1, None
+            height: max((len(self._lines) + 1) * self.line_height, scr.height)
+
+    MDFloatLayout:
+        size_hint: 0.1, None
+        pos_hint: {'right': 1}
+        
+        MDIconButton:
+            icon: "clipboard-text"
+            theme_icon_color: "Custom"
+            icon_color: app.theme_cls.text_color
+            size_hint: 1, None
+            pos_hint: {'top': 1, 'right' : 1}
+            on_release: root.cop(root.text)
+
+        MDIconButton:
+            icon: "console"
+            theme_icon_color: "Custom"
+            icon_color: app.theme_cls.text_color
+            size_hint: 1, None
+            pos_hint: {'top': 0.5, 'right' : 1}
+            on_release: root.cons()
+""")
 
