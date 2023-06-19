@@ -22,7 +22,7 @@ from kivymd.uix.navigationdrawer import (MDNavigationDrawer, MDNavigationDrawerM
                                          MDNavigationDrawerItem, MDNavigationDrawerDivider, MDNavigationDrawerLabel,
                                          MDNavigationDrawerHeader)
 from kivymd.uix.datatables import MDDataTable
-Window.size = (650, 600)
+Window.size = (650, 600) #https://github.com/Android-for-Python/Android-for-Python-Users#most-common-issues
 
 class MyApp(MDApp):
     def __init__(self):
