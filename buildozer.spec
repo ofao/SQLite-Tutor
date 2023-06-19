@@ -37,7 +37,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,sqlite3,kivymd,kivymd-extensions,kivymd-extensions.akivymd,sqlite3
+requirements = python3,kivy,sqlite3,kivymd,kivymd-extensions,kivymd-extensions.akivymd
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -64,7 +64,7 @@ orientation = portrait
 # author = © Copyright Info
 
 # change the major version of python used by the app
-osx.python_version = 3.9
+osx.python_version = *
 
 # Kivy version to use
 osx.kivy_version = *
@@ -107,7 +107,7 @@ fullscreen = 1
 #android.api = 31
 
 # (int) Minimum API your APK / AAB will support.
-#android.minapi = 21
+#android.minapi = 10
 
 # (int) Android SDK version to use
 #android.sdk = 20
