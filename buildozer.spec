@@ -1,7 +1,7 @@
 [app]
 
 # (str) Title of your application
-title = My Application
+title = MyApplication
 
 # (str) Package name
 package.name = myapp
@@ -13,7 +13,7 @@ package.domain = org.test
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,kv,db,atlas,txt
+source.include_exts = 
 
 # (list) List of inclusions using pattern matching
 #source.include_patterns = assets/*,images/*.png
@@ -321,7 +321,7 @@ android.allow_backup = True
 #p4a.url =
 
 # (str) python-for-android fork to use in case if p4a.url is not specified, defaults to upstream (kivy)
-#p4a.fork = kivy
+#p4a.fork = kivy,kivymd
 
 # (str) python-for-android branch to use, defaults to master
 p4a.branch = develop
@@ -364,7 +364,7 @@ p4a.branch = develop
 #ios.kivy_ios_dir = ../kivy-ios
 # Alternately, specify the URL and branch of a git checkout:
 ios.kivy_ios_url = https://github.com/kivy/kivy-ios
-ios.kivy_ios_branch = master
+ios.kivy_ios_branch = develop
 
 # Another platform dependency: ios-deploy
 # Uncomment to use a custom checkout
