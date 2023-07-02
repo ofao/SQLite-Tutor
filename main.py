@@ -123,7 +123,7 @@ class MyApp(MDApp):
         s2 = ''
         lbl = MDLabel(text = item.text, bold = True, font_size = 10, font_style = 'H6', adaptive_height = True, halign = 'center')  ##заголовок
         box.add_widget(lbl)
-        with open(title[k] + '/' + item.text + '.txt', encoding = 'ANSI') as f:
+        with open(title[k] + '/' + item.text + '.txt', 'r', encoding = 'ANSI') as f:
             for line in f:
                 if line.count('<<') > 0 or line.count('>>') > 0 or s2 != '':
                     if s != '':
