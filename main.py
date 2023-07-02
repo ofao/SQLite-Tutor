@@ -22,7 +22,7 @@ from kivymd.uix.navigationdrawer import (MDNavigationDrawer, MDNavigationDrawerM
                                          MDNavigationDrawerItem, MDNavigationDrawerDivider, MDNavigationDrawerLabel,
                                          MDNavigationDrawerHeader)
 from kivymd.uix.datatables import MDDataTable
-import webbrowser                                                                             #Для браузера
+import webbrowser                                                                            #Для браузера
 Window.size = (650, 600)
 
 class MyApp(MDApp):                                                                                 #Класс главного окна
@@ -118,7 +118,7 @@ class MyApp(MDApp):                                                             
         s2 = ''
         lbl = MDLabel(text = item.text, bold = True, font_size = 10, font_style = 'H6', adaptive_height = True, halign = 'center')  ##заголовок
         box.add_widget(lbl)
-        with open(title[k] + '/' + item.text + '.txt', 'r', encoding = 'ANSI') as f:
+        with open(item.text + '.txt', 'r') as f:
             for line in f:
                 if line.count('<<') > 0 or line.count('>>') > 0 or s2 != '':
                     if s != '':
@@ -136,7 +136,7 @@ class MyApp(MDApp):                                                             
                         #from create import create_schema
                         line = line.replace('<<picture>>', '')
                         line = line.replace('\n', '')
-                        lbl = Image(source = fr'{title[k]}\{line}', size_hint_min = (589, 272))
+                        lbl = Image(source = line, size_hint_min = (589, 272))
                         box.add_widget(lbl)
                         #box.add_widget(create_schema())
                     elif line.count('<<answer>>') > 0 and s2 == '':
@@ -146,7 +146,7 @@ class MyApp(MDApp):                                                             
                         line = line.replace('\n', '')
                         line = line.replace('<<URL>>', '')
                         #print(dir(Image))
-                        lbl = Image(source = fr'{title[k]}\URL.jpeg', size_hint_min = (589, 272), on_touch_up = lambda a, b: webbrowser.open_new_tab(line))
+                        lbl = Image(source = 'URL.jpeg', size_hint_min = (589, 272), on_touch_up = lambda a, b: webbrowser.open_new_tab(line))
                         box.add_widget(lbl)
                     elif line.count('>>') > 0:
                         line = line.replace('<<', '')
@@ -292,7 +292,7 @@ class Terminal(MDBoxLayout):                                                    
 if __name__ == '__main__':
     myapp = MyApp()
     title, lesson, values = [], [], []
-    with open('темы.txt', 'r', encoding = 'utf8') as f:                                             #Считывание разделов и уроков из текстового файла
+    with open('темы.txt', 'r') as f:                                             #Считывание разделов и уроков из текстового файла
         for line in f:
             title.append(line.split(' (')[0])
             a = line.split(' (')[1][:-2]
@@ -312,5 +312,3 @@ if __name__ == '__main__':
     myapp.run()
     cursor.close()
     connection.close() 
-
-
