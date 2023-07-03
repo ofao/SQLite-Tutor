@@ -13,7 +13,7 @@ package.domain = org.test
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpeg,kv,atlas,db,txt
+source.include_exts = 
 
 # (list) List of inclusions using pattern matching
 #source.include_patterns = assets/*,images/*.png
@@ -37,7 +37,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,sqlite3,kivymd,kivymd-extensions,kivymd-extensions.akivymd,pyperclip
+requirements = kivy,kivymd,kivymd-extensions,kivymd-extensions.akivymd,pyperclip
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -59,7 +59,7 @@ orientation = portrait
 #
 # OSX Specific
 #
-osx.python_version = 3.9
+
 #
 # author = © Copyright Info
 
