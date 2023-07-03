@@ -22,7 +22,7 @@ from kivymd.uix.navigationdrawer import (MDNavigationDrawer, MDNavigationDrawerM
                                          MDNavigationDrawerItem, MDNavigationDrawerDivider, MDNavigationDrawerLabel,
                                          MDNavigationDrawerHeader)
 from kivymd.uix.datatables import MDDataTable
-import webbrowser                                                                            #Для браузера
+import webbrowser, pyperclip                                                                     #Для браузера
 Window.size = (650, 600)
 
 class MyApp(MDApp):                                                                                 #Класс главного окна
@@ -58,7 +58,7 @@ class MyApp(MDApp):                                                             
         self.lesson_scroll.size = (size[0], size[1] * 0.9)
         
     def build(self):                                                                                #Функция, которая вызывается 1 раз при запуске программы
-        global title, lesson, values
+        global title, lesson, values, cursor
         Window.bind(size = self.on_resize)                                                          #привязка на изменение размерова окна
         cursor.execute('SELECT Значение from DATA where Тип="Обучение"')
         obuch_passed = cursor.fetchone()[0]
@@ -192,7 +192,9 @@ class MyApp(MDApp):                                                             
         
     
 class Onboarding(MDScreen):                                                                         #Класс приветствующего окна
-    def finish_callback(self):                                                                      #Функция выхода из окна приветствия
+    def finish_callback(self):  
+        #Функция выхода из окна приветствия
+        global cursor, connection
         myapp.screen.clear_widgets()
         cursor.execute('UPDATE DATA set Значение="True" where Тип="Обучение"')
         if myapp.theme_cls.theme_style == 'Dark':
@@ -216,8 +218,7 @@ class MD3Card(MDCard):                                                          
 class TextInp(MDBoxLayout):                                                                         #Класс текстового поля ввода команд
     text = StringProperty()
 
-    def cop(self, text):                                                                            #Функция копирования текста в буфер обмена
-        import pyperclip
+    def cop(self, text):                                                                            #Функция копирования текста в буфер обменa
         pyperclip.copy(text)
         Snackbar(text = 'Текст скопирован').open()
 
@@ -249,7 +250,9 @@ class Terminal(MDBoxLayout):                                                    
     text = StringProperty()
     obuch = StringProperty()
 
-    def check(self, textinp, lbl, obuch):                                                           #Функция проверки введенного кода
+    def check(self, textinp, lbl, obuch):   
+        #Функция проверки введенного кода
+        global connection, cursor
         try:
             cursor.execute(textinp.text.replace('\n', ''))
             connection.commit()
