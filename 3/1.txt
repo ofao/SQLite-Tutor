@@ -1,0 +1,55 @@
+SQL команда CREATE позволяет создавать объекты базы данных. В SQLite при помощи команды CREATE (оператора CREATE) можно создавать: таблицы, представления, триггеры, индексы, виртуальные таблицы:
+CREATE TABLE;
+CREATE INDEX;
+CREATE TRIGGER;
+CREATE VIEW;
+CREATE VIRTUAL TABLE.
+Команда CREATE (оператор CREATE) позволяет нам создавать таблицы в базе данных SQLite3. Общий синтаксис создания таблиц в SQLite3 показан на рисунке ниже.
+<<picture>>CREATE.png
+Рассмотрим примеры:
+<<title>>Создание таблицы без описания столбцов
+<<CREATE TABLE table1 (a,b,c,d);>>
+Данная команда создаст таблицу с именем table1 со столбцами a, b, c, d и при необходимости СУБД автоматически определит тип данных, который будет храниться в столбце.
+<<title>>Создание таблицы с описанием столбцов и ограничениями
+<<CREATE TABLE table2 (
+id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+name TEXT NOT NULL,
+surname TEXT NOT NULL,
+age INT NOT NULL,
+address TEXT NOT NULL
+);>>
+В данном случае при помощи команды CREATE (оператора CREATE) мы создали таблицу, явно указав тип данных для каждого столбца, так же каждый столбец не может иметь пустого значения, а первый столбец id является суррогатным ключом таблицы (об этом свидетельствует ограничения PRIMARY KEY и AUTOINCREMENT).
+<<title>>Создание таблицы с использованием квалификатора
+<<CREATE TABLE sq.table4 (
+a INTEGER NOT NULL,
+b TEXT UNIQUE NOT NULL,
+c REAL NOT NULL,
+PRIMARY KEY(a)
+);>>
+<<title>>Создание таблицы с проверкой на ее существование
+Когда вы создаете новые таблицы, то не всегда знаете структура базы данных, а, соответственно, не всегда знаете имена уже существующих таблиц, поэтому SQLite позволяет проверять имена таблиц на уникальность перед их созданием, для этого используется конструкция IF NOT EXISTS:
+<<CREATE TABLE IF NOT EXISTS table5 (
+a INTEGER NOT NULL,
+b TEXT  UNIQUE NOT NULL,
+c REAL NOT NULL,
+PRIMARY KEY(a)
+);>>
+Если таблицы с именем table5 в базе данных не будет, то SQLite создаст эту таблицу, если таблица table5 будет в базе данных, то таблица создана не будет.
+<<title>>Создание временных таблиц
+Помимо обычных таблиц, SQLite позволяет создавать в базе данных временные таблицы. Временные таблицы в SQLite создаются в оперативной памяти и доступны только для того клиента, который эту таблицу создал, другие пользователи просто не увидят временную таблицу.
+<<CREATE TEMP TABLE table6 (
+a INTEGER NOT NULL,
+b TEXT  UNIQUE NOT NULL,
+c REAL NOT NULL,
+PRIMARY KEY(a)
+);>>
+Временные таблицы в SQLite имеют пометку temp. Вместо ключевого слова TEMP для создания временной таблицы можно использовать ключевое слово TEMPORARY.
+<<title>>Самостоятельно:
+Создайте таблицу tab1, содержащую следующие поля:
+id - integer;
+name - text;
+pro - text;
+sex - text;
+sal - real.
+<<>>
+<<answer>>CREATE TABLE tab1(id integer, name text, pro text, sex text, sal real)
