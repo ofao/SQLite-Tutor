@@ -1,1 +1,41 @@
-
+<title>Метакоманды</title>
+<text>
+  sdvdrvrd
+</text>
+<picture>1.png</picture>
+<table>
+  <row>
+    <col>.show</col>
+    <col>Показывает текущие настройки заданных параметров</col>
+  </row>
+  <row>
+    <col>.databases</col>
+    <col>Показывает название баз данных и файлов</col>
+  </row>
+  <row>
+    <col>.quit</col>
+    <col>Выход из sqlite3</col>
+  </row>
+  <row>
+    <col>.tables</col>
+    <col>Показывает текущие таблицы</col>
+  </row>
+  <row>
+    <col>.schema</col>
+    <col>Отражает структуру таблицы</col>
+  </row>
+  <row>
+    <col>.header</col>
+    <col>Отобразить или скрыть шапку таблицы</col>
+  </row>
+  <row>
+    <col>.mode</col>
+    <col>Выбор режима отображения данных таблицы</col>
+  </row>
+  <row>
+    <col>.dump</col>
+    <col>Сделать копию базы данных в текстовом формате</col>
+  </row>
+</table>
+    
+  
