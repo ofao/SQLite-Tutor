@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
       - name: Installing
         run: 'sudo apt-get update'
 
@@ -24,9 +27,6 @@ jobs:
 
       - name: Installing
         run: 'sudo apt-get install aidl'
-             
-      - name: Checkout
-        uses: actions/checkout@v2
           
       - name: Build with Buildozer
         uses: ArtemSBulgakov/buildozer-action@v1
