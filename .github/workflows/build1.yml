@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Installing
         with:
-          run: sudo apt-get install aidl
+          command: sudo apt-get install aidl
         
       - name: Checkout
         uses: actions/checkout@v2
