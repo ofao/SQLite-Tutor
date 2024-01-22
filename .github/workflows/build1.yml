@@ -14,13 +14,16 @@ jobs:
 
     steps:
       - name: Installing
-        exec:
-          command: 
-               - 'sudo apt-get update'
-               - 'sudo apt-get install build-essential'
-               - 'sudo apt-get install libstdc++6'
-               - 'sudo apt-get install aidl'
-          
+        run: 'sudo apt-get update'
+
+      - name: Installing
+        run: 'sudo apt-get install build-essential'
+
+      - name: Installing
+        run: 'sudo apt-get install libstdc++6'
+
+      - name: Installing
+        run: 'sudo apt-get install aidl'
              
       - name: Checkout
         uses: actions/checkout@v2
