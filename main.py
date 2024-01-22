@@ -491,7 +491,7 @@ class Terminal(MDBoxLayout):                                                    
                 except Exception as e: print(e)
                 if obuch == 'kontrol':
                     if result == myapp.answer:
-                        lbl.text = 'Верно'    
+                        lbl.text = 'Верно'
                     else:
                         lbl.text = 'Неверно, попробуйте еще'
                         return
@@ -500,6 +500,7 @@ class Terminal(MDBoxLayout):                                                    
                 data = []
                 for k in cols:
                     data.append(((k, dp(30))))
+                self..add_widget(Image(source = 'https://iconscout.com/lottie-animation/win-10290126', width = Window.width, height = Window.width, size_hint_y = None))
                 self.add_widget(MDDataTable(size_hint = (1, None), column_data = data))
             elif textinp.text.casefold().count('drop table') == 1:
                 if obuch == 'kontrol':
