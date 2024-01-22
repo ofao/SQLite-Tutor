@@ -5,7 +5,7 @@ from kivy.uix.textinput import TextInput
 #from kivymd.uix.textfield import MDTextField
 from kivymd.uix.button import MDRoundFlatIconButton, MDIconButton, MDFlatButton, MDFloatingActionButton, MDRectangleFlatButton
 from kivymd.uix.card import MDCard
-import sqlite3, pickle
+import sqlite3
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.snackbar import Snackbar
 #from board import *  #введение
@@ -25,7 +25,8 @@ from kivymd.uix.datatables import MDDataTable
 ###ИМПОРТЫ ДЛЯ МОБИЛЬНОЙ ВЕРСИИ - АНДРОИД
 #from android.permissions import Parmission, request_permissions
 #from android.storage import primary_external_storage_path
-
+import xml.etree.ElementTree as ET #ЧТЕНИЕ XML ФАЙЛОВ
+ 
 Builder.load_string("""
 <MyAKOnboardingItem@AKOnboardingItem>
     source: ""
@@ -252,10 +253,10 @@ class MyApp(MDApp):                                                             
     def build(self):                                                                                #Функция, которая вызывается 1 раз при запуске программы
         global title, lesson, values
         Window.bind(size = self.on_resize)                                                          #привязка на изменение размеров окна
-        self.grid.cols = 2 #в мобильной версии 2 столбца
-        self.scroll.size = (Window.width, Window.height * 0.9)
-        self.lesson_scroll.size = (Window.width, Window.height * 0.9)
-        #self.on_resize('a', Window.size)
+        #self.grid.cols = 2 #в мобильной версии 2 столбца
+        #self.scroll.size = (Window.width, Window.height * 0.9)
+        #self.lesson_scroll.size = (Window.width, Window.height * 0.9)
+        self.on_resize('a', Window.size)
         try:
             cursor.execute('SELECT Значение from DATA where Тип="Обучение"')
             obuch_passed = cursor.fetchone()[0]
@@ -321,6 +322,12 @@ class MyApp(MDApp):                                                             
         lbl = MDLabel(text = item.text, bold = True, font_size = 10, font_style = 'H6', adaptive_height = True, halign = 'center')  ##заголовок
         box.add_widget(lbl)
         try:
+            tree = ET.parse(str(k + 1) + '/' + str(j + 1) + '.xml')
+            root = tree.getroot()
+            for elem in root.iter():
+                box.add_widget(MDLabel(text = str(elem.tag) + ' ' + str(elem.attrib), font_style = 'Body1', adaptive_height = True))
+                print(elem.tag, elem.attrib)
+            '''
             with open(str(k + 1) + '/' + str(j + 1) + '.pickle', 'rb') as f:
                 lines = pickle.load(f)
                 for line in lines:
@@ -377,7 +384,7 @@ class MyApp(MDApp):                                                             
                         s += line
             if s != '':
                 lbl = MDLabel(text = s, font_style = 'Body1', adaptive_height = True)
-                box.add_widget(lbl)
+                box.add_widget(lbl)'''
         except Exception as e:
             box.add_widget(MDLabel(text = 'error: ' + str(e), font_style = 'Body1', adaptive_height = True))
         self.lesson_scroll.add_widget(box)
