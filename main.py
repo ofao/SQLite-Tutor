@@ -26,7 +26,7 @@ from kivymd.uix.datatables import MDDataTable
 #from android.permissions import Parmission, request_permissions
 #from android.storage import primary_external_storage_path
 import xml.etree.ElementTree as ET #ЧТЕНИЕ XML ФАЙЛОВ
- 
+#https://iconscout.com/lottie-animation/win-10290126 
 Builder.load_string("""
 <MyAKOnboardingItem@AKOnboardingItem>
     source: ""
