@@ -5,6 +5,7 @@ on:
   pull_request:
     branches: ['withXMLtags']
 
+
 jobs:
   # Build job. Builds app for Android with Buildozer
   build-android:
@@ -13,10 +14,13 @@ jobs:
 
     steps:
       - name: Installing
-        run: sudo apt-get update |
-             sudo apt-get install build-essential 
-             sudo apt-get install libstdc++6 |
-             sudo apt-get install aidl |
+        exec:
+          command: 
+               - 'sudo apt-get update'
+               - 'sudo apt-get install build-essential'
+               - 'sudo apt-get install libstdc++6'
+               - 'sudo apt-get install aidl'
+          
              
       - name: Checkout
         uses: actions/checkout@v2
