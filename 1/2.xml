@@ -6,6 +6,10 @@
 <picture>1.png</picture>
 <table>
   <row>
+    <col>.open</col>
+    <col>Открывает существующую, либо создает новую БД</col>
+  </row>
+  <row>
     <col>.show</col>
     <col>Показывает текущие настройки заданных параметров</col>
   </row>
