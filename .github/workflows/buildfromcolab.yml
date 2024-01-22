@@ -13,34 +13,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        
+    
       - name: Installing
-        run: 'sudo apt-get update'
+        run: '!sudo apt update'
 
       - name: Installing
-        run: 'sudo apt-get install build-essential'
+        run: '!sudo apt install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev'
 
       - name: Installing
-        run: 'sudo apt-get install libstdc++6'
+        run: '!pip3 install --user --upgrade Cython==0.29.33 virtualenv'
 
       - name: Installing
-        uses: ~ / .buildozer / android / platform / android-sdk / tools / bin / sdkmanager / build-toolsv@29.0.0
-        with:
-          run: 'sudo apt-get install aidl'
-      - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
-        id: buildozer
-        with:
-          workdir: .
-          buildozer_version: master
+        run: '!git clone https://github.com/kivy/buildozer'
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: package
-          path: ${{ steps.buildozer.outputs.filename }}
+      - name: Installing
+        run: '%cd buildozer'
+
+      - name: Installing
+        run: '!python setup.py build'
+
+      - name: Installing
+        run: '!pip install -e .'
+
+      - name: Installing
+        run: '%cd ..'
+
+      - name: Installing
+        run: '!buildozer -v android debug'
+
 
 
   
