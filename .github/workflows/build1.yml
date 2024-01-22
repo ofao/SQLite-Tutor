@@ -11,6 +11,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: update
+        with:
+          command: sudo apt-get update
+          workdir: .
+
+      - name: updatee
+        with:
+          command: sudo apt-get install build-essential
+          workdir: .
+
+      - name: updateee
+        with:
+          command: sudo apt-get install libstdc++6
+          workdir: .
+
+      - name: updateeee
+        with:
+          command: sudo apt-get install aidl
+          workdir: .
+          
       - name: Build with Buildozer
         uses: ArtemSBulgakov/buildozer-action@v1
         id: buildozer
