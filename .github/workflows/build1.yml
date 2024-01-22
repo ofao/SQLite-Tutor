@@ -10,15 +10,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        
-      - name: Installing
-        with:
-          command: sudo apt-get install aidl
           
       - name: Build with Buildozer
         uses: ArtemSBulgakov/buildozer-action@v1
         id: buildozer
         with:
+          command: sudo apt-get install aidl
           workdir: .
           buildozer_version: master
 
