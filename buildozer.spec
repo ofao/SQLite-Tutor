@@ -68,7 +68,6 @@ osx.kivy_version = 2.1.0
 osx.kivymd_version = 1.1.1
 osx.kivymd-extensions_version = 1.0.0
 osx.kivymd-extensions.akivymd_version = .2.6
-osx.pyperclip_version = 1.8.2
 #
 # Android specific
 #
