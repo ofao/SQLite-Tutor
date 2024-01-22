@@ -24,12 +24,15 @@ jobs:
 
       - name: Installing
         run: 'sudo apt-get install libstdc++6'
-          
+
+      - name: Installing
+        uses: ~ / .buildozer / android / platform / android-sdk / tools / bin / sdkmanager / build-toolsv@29.0.0
+        with:
+          run: 'sudo apt-get install aidl'
       - name: Build with Buildozer
         uses: ArtemSBulgakov/buildozer-action@v1
         id: buildozer
         with:
-          run: 'sudo apt-get install aidl'
           workdir: .
           buildozer_version: master
 
