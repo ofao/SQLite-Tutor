@@ -317,75 +317,44 @@ class MyApp(MDApp):                                                             
             if item.text in lesson[k]:
                 j = lesson[k].index(item.text)
                 break
-        s = ''
-        s2 = ''
         lbl = MDLabel(text = item.text, bold = True, font_size = 10, font_style = 'H6', adaptive_height = True, halign = 'center')  ##заголовок
         box.add_widget(lbl)
         try:
             tree = ET.parse(str(k + 1) + '/' + str(j + 1) + '.xml')
             root = tree.getroot()
             for elem in root.iter():
-                box.add_widget(MDLabel(text = str(elem.tag) + ' ' + str(elem.attrib), font_style = 'Body1', adaptive_height = True))
-                print(elem.tag, elem.attrib)
-            '''
-            with open(str(k + 1) + '/' + str(j + 1) + '.pickle', 'rb') as f:
-                lines = pickle.load(f)
-                for line in lines:
-                    if line.count('<<') > 0 or line.count('>>') > 0 or s2 != '':
-                        if s != '':
-                            s = s[:-1]                                                                  #убираем конечный enter (\n)
-                            lbl = MDLabel(text = s, font_style = 'Body1', adaptive_height = True)
-                            box.add_widget(lbl)
-                            s = ''
-                        if line.count('<<title>>') > 0 and s2 == '':
-                            line = line.replace('<<title>>', '')
-                            line = line.replace('\n', '')
-                            lbl = MDLabel(text = line, bold = True, font_size = 10,
+                if elem.tag == 'text':
+                    lbl = MDLabel(text = elem.text, font_style = 'Body1', adaptive_height = True)
+                    box.add_widget(lbl)
+                elif elem.tag == 'title':
+                    lbl = MDLabel(text = elem.text, bold = True, font_size = 10,
                                                    font_style = 'H6', adaptive_height = True, halign = 'center')
-                            box.add_widget(lbl)
-                        elif line.count('<<picture>>') > 0 and s2 == '':
-                            #from create import create_schema
-                            line = line.replace('<<picture>>', '')
-                            line = line.replace('\n', '')
-                            try:
-                                lbl = Image(source = fr'{k + 1}/{line}', size_hint_y = None)
-                                if Window.width < lbl.texture_size[0]:
-                                    lbl.height = lbl.texture_size[1] / (lbl.texture_size[0] / Window.width)
-                                else:
-                                    lbl.height = lbl.texture_size[1] * (Window.width/lbl.texture_size[0])
-                                lbl.width = Window.width
-                                #lbl.bind(on_touch_move = self.images_open)
-                                box.add_widget(lbl)
-                            except Exception as e: box.add_widget(MDLabel(text = 'Width: ' + str(Window.width) + ' Picture size: ' + str(lbl.texture_size) +
-                                                                          ' Norm size: ' + str(lbl.norm_image_size) + ' Exception: ' + str(e)))
-                            #box.add_widget(create_schema())
-                        elif line.count('<<answer>>') > 0 and s2 == '':
-                            line = line.replace('\n', '')
-                            self.answer = line.replace('<<answer>>', '')
-                        elif line.count('<<URL>>') > 0 and s2 == '':
-                            print(00000000000)
-                            line = line.replace('\n', '')
-                            line = line.replace('<<URL>>', '')
-                            lbl = Image(source = fr'{k + 1}\URL.jpeg', width = Window.width, height = Window.width, size_hint_y = None)
-                            #lbl.on_touch_up = lambda x: webbrowser.open_new_tab(line)
-                            box.add_widget(lbl)
-                        elif line.count('>>') > 0:
-                            line = line.replace('<<', '')
-                            line = line.replace('>>', '')
-                            line = line.replace('\n', '')
-                            s2 += line
-                            inp = TextInp(text = s2)
-                            box.add_widget(inp)
-                            s2 = '' 
+                    box.add_widget(lbl)
+                elif elem.tag == 'picture':
+                    #from create import create_schema
+                    try:
+                        lbl = Image(source = fr'{k + 1}/{elem.text}', size_hint_y = None)
+                        if Window.width < lbl.texture_size[0]:
+                            lbl.height = lbl.texture_size[1] / (lbl.texture_size[0] / Window.width)
                         else:
-                            line = line.replace('<<', '')
-                            s2 += line
-                    else:
-                        s += line
-            if s != '':
-                lbl = MDLabel(text = s, font_style = 'Body1', adaptive_height = True)
-                box.add_widget(lbl)'''
+                            lbl.height = lbl.texture_size[1] * (Window.width/lbl.texture_size[0])
+                        lbl.width = Window.width
+                        #lbl.bind(on_touch_move = self.images_open)
+                        box.add_widget(lbl)
+                    except Exception as e: box.add_widget(MDLabel(text = 'Width: ' + str(Window.width) + ' Picture size: ' + str(lbl.texture_size) +
+                                                                          ' Norm size: ' + str(lbl.norm_image_size) + ' Exception: ' + str(e)))
+                    #box.add_widget(create_schema())
+                elif elem.tag == 'answer':
+                    self.answer = elem.text
+                elif elem.tag == 'URL ':
+                    lbl = Image(source = fr'{k + 1}\URL.jpeg', width = Window.width, height = Window.width, size_hint_y = None)
+                    #lbl.on_touch_up = lambda x: webbrowser.open_new_tab(line)
+                    box.add_widget(lbl)
+                elif elem.tag == 'code':
+                    inp = TextInp(text = elem.text)
+                    box.add_widget(inp)
         except Exception as e:
+            print(e)
             box.add_widget(MDLabel(text = 'error: ' + str(e), font_style = 'Body1', adaptive_height = True))
         self.lesson_scroll.add_widget(box)
         self.screen.add_widget(self.lesson_scroll)
@@ -500,7 +469,7 @@ class Terminal(MDBoxLayout):                                                    
                 data = []
                 for k in cols:
                     data.append(((k, dp(30))))
-                self..add_widget(Image(source = 'https://iconscout.com/lottie-animation/win-10290126', width = Window.width, height = Window.width, size_hint_y = None))
+                self.add_widget(Image(source = 'https://iconscout.com/lottie-animation/win-10290126', width = Window.width, height = Window.width, size_hint_y = None))
                 self.add_widget(MDDataTable(size_hint = (1, None), column_data = data))
             elif textinp.text.casefold().count('drop table') == 1:
                 if obuch == 'kontrol':
@@ -550,5 +519,3 @@ if __name__ == '__main__':
     myapp.run()
     cursor.close()
     connection.close() 
-
-
