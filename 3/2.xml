@@ -10,12 +10,12 @@
 <picture>DROP.png</picture>
 <text>Пример:</text>
 <title>Простая форма удаления таблицы</title>
-<code>DROP TABLE tbl_nm;</code>
+<code>DROP TABLE table1;</code>
 <title>Удаление таблицы с проверкой на существование таблицы</title>
-<code>DROP TABLE IF EXISTS table_name;</code>
+<code>DROP TABLE IF EXISTS table1;</code>
 <title>Удаление таблицы с указанием квалификатора</title>
 <text>Думаю, вы уже догадались, что конструкция IF EXIST заставляет сперва проверить SQLite3, а существует ли данная таблица вообще, прежде чем попытаться применить команду DROP TABLE. Мы также можем явно указать базу данных, из которой хотим удалить таблицу, для этого ставим точку перед именем таблицы и указываем имя базы данных.</text>
-<code>DROP TABLE name-database.name-schema;</code>
+<code>DROP TABLE sq.table2;</code>
 <title>Самостоятельно:</title>
 <text>Удалите талицу tab1, созданную вами в прошлом уроке.</text>
 <code/>
