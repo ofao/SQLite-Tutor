@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+<text>Существует большое множест различных способов присоединения таблиц, но в SQLite поддерживаются только следующие:</text>
+<picture>JOIN.png</picture>
+</document>
