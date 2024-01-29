@@ -1,8 +1,8 @@
 on:
   push:
-    branches: [ main ]
+    branches: [ withXMLtags ]
   pull_request:
-    branches: [ main ]
+    branches: [ withXMLtags ]
   schedule:
     - cron: '0 0 1,15 * *'
 
