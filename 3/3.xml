@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+<text>Оператор ALTER в SQLite3 умеет делать ровно две вещи: переименовывать таблицы и добавлять новые колонки. Синтаксис команды ALTER в SQLite3 представлен ниже.</text>
+<picture>ALTER.png</picture>
+<text>Сначала создадим таблицу</text>
+<code>CREATE TABLE table1 (a,b,c,d);</code>
+<title>Переименовать таблицу</title>
+<code>ALTER TABLE table1 RENAME TO table2;</code>
+<text>Убедимся, что переименование произошло успешно, пользуясь всё той же .tables.</text>
+<title>Добавить новый столбец</title>
+<code>ALTER TABLE table2 ADD COLUMN e;</code>
+<text>Обратите внимание: новому столбцу можно задать характеристики, как и при создании новой таблицы. Чтобы убедиться, что создан новый столбец, воспользуйтесь командой .schema table2.</text>
+<title>Самостоятельно:</title>
+<text>Добавьте в таблицу tab1 столбец age (integer). Также Вы можете пройти тест по QR коду ниже:</text>
+<code/>
+<answer>ALTER TABLE tab1 ADD COLUMN age INTEGER;</answer>
+<URL>https://videouroki.net/tests/917436745/</URL>
