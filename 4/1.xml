@@ -11,4 +11,13 @@
   VALUES ('Song', ' Wei', 22, 'China'),
   ('Vladimir', 'Gusakov', 28, 'Belarus');
 </code>
+<text>Если все столбцы поддерживают значения по умолчанию или автогенерацию или значение NULL, то с помощью ключевого слова DEFAULT можно явно указать, что в качестве значения будут использоваться значения по умолчанию:</text>
+<code>CREATE TABLE users
+(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT DEFAULT 'Undefined',
+    age INTEGER DEFAULT 18
+);</code>
+<code>INSERT INTO users DEFAULT VALUES;</code>
+<text>В этом случае столбцы, для которых определено значение по умолчанию, получат это значение. Остальные столбцы получать значение NULL.</text>
 </document>
