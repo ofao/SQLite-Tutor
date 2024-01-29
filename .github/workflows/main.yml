@@ -1,9 +1,9 @@
 name: CI
 on:
   push:
-    branches: [ main ]
+    branches: [ withXMLtags ]
   pull_request:
-    branches: [ main ]
+    branches: [ withXMLtags ]
     
 jobs:
   build:
