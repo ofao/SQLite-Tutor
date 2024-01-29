@@ -1,2 +1,29 @@
-�������� ALTER � SQLite3 ����� ������ ����� ��� ����: ��������������� ������� � ��������� ����� �������. ��������� ������� ALTER � SQLite3 ����������� ����.
-<<picture>>UPDATE.png
+<document>
+<text>Для обновления данных в SQLite применяется команда UPDATE. Она имеет следующий формальный синтаксис:</text>
+<picture>UPDATE.png</picture>
+<text>Создадим таблицу и заполним ее:</text>
+<code>CREATE TABLE products
+(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    company TEXT NOT NULL,
+    product_count INTEGER DEFAULT 0,
+    price INTEGER
+);</code>
+<code>INSERT INTO products (name, company, product_count, price)
+VALUES
+('iPhone 13', 'Apple', 3, 76000),
+('iPhone 12', 'Samsung', 2, 51000),
+('Galaxy S21', 'Samsung', 2, 56000),
+('Galaxy S20', 'Samsung', 1, 41000),
+('P40 Pro', 'Huawei', 5, 36000);</code>
+<text>В данном примере мы ошиблись во второй строке, где производитель должен быть Apple. Для исправления ситуации используется команда UPDATE:</text>
+<code>UPDATE TABLE products SET company='Samsung' WHERE id=2;</code>
+<text>Здесь мы конкретно обозначили какую строку исправить с помощью условия WHERE, который Вы изучите в следующих уроках. Давайте попробуем увеличить всем телефонам цену на 300:</text>
+<code>UPDATE TABLE products SET price = price + 300;</code>
+<text>Также можно обновлять сразу несколько столбцов:</text>
+<code>UPDATE products
+SET company = 'Samsung Inc.',
+    product_count = product_count + 3
+WHERE company = 'Samsung';</code>
+</document>
