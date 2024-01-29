@@ -7,13 +7,53 @@
 <picture>CREATETRIGGER.png</picture>
 <text>Таким образом, мы видим в схеме что можем создать триггеры на выполнение команд INSERT, UPDATE и DELETE. Но также мы можем выбирать момент времени, то есть перед выполнением команды - BEFORE, после - AFTER или вместо операции - INSTED OF.
 </text>
-<subtitle>INSERT</subtitle>
 <text>Пример триггера, который будет срабатывать после вставки данных в таблицу:</text>
 <code>CREATE TRIGGER aft_insert AFTER INSERT ON orders
 BEGIN
 UPDATE products SET quantity = quantity - NEW.quantity;
 END;</code>
-<text>При оформлении заказа, то есть при добавлении строки в таблицу orders количество товара на складе будет уменьшаться, то есть мы уменьшаем значение столбца quantity на количество товара в заказе.</text>
+<text>При оформлении заказа, то есть при добавлении строки в таблицу orders количество товара на складе будет уменьшаться,
+  то есть мы уменьшаем значение столбца quantity на количество товара в заказе.
+  Пример триггера, который срабатывает перед операцией добавления строки:
+</text>
+<code>
+  CREATE TRIGGER bef_insert BEFORE INSERT ON orders
+BEGIN
+SELECT CASE 
+WHEN ((SELECT quantity FROM products WHERE products.id_product = NEW.id_product) < NEW.quantity) 
+THEN RAISE(ABORT, 'Недостаточно товара на складе') 
+END; 
+END;
+</code>
+<text>Этот триггер сработает перед добавлением заказа,
+	он проверит наличие выбранных товаров на складе и в случае недостатка выведет соответствующую ошибку.
+Самый частый пример использования триггера INSTEAD OF - для работы с представлениями. Когда при попытке вставить в представление
+	записи, мы получаем ошибку: "Представление или функция недоступны для обновления, поскольку изменение затрагивает несколько базовых таблиц."
+В таких случаях используют триггеры INSTEAD OF. Для начала давайте создадим представление:</text>
+<code>CREATE VIEW OrderDetails
+AS
+SELECT *
+FROM orders
+ORDER BY date(orders.date_order) DESC;
+</code>
+<text>Данное представление показывает нам самые последние заказы. Создадим для этого представления триггер:</text>
+<code>CREATE TRIGGER view_ins_trig 
+INSTEAD OF INSERT 
+ON OrderDetails 
+BEGIN
+        INSERT INTO orders(id_product, quantity, date_order) 
+        VALUES (new.id_product, new.quantity, new.date_order); 
+END;
+</code>
+<text>Теперь при выполнении команды INSERT для представления OrderDetails записи будут добавляться в базовую таблицу orders.
+</text>
 <title>Удаление триггеров</title>
+<text>Синтаксис удаления триггеров такой же, как и для удаления любого другого объекта БД:</text>
 <picture>DROPTRIGGER.png</picture>
+<text>Простое удаление триггера:</text>
+<code>DROP TRIGGER aft_insert;</code>
+<text>Удаление триггера с указанием схемы:</text>
+<code>DROP TRIGGER sq.bef_insert;</code>
+<text>Удаление триггера с проверкой на существование:</text>
+<code>DROP TRIGGER IF EXISTS sq.view_ins_trig;</code>
 </document>
