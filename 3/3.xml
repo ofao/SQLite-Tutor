@@ -10,6 +10,7 @@
 <title>Добавить новый столбец</title>
 <code>ALTER TABLE table2 ADD COLUMN e;</code>
 <text>Обратите внимание: новому столбцу можно задать характеристики, как и при создании новой таблицы. Чтобы убедиться, что создан новый столбец, воспользуйтесь командой .schema table2.</text>
+<code>ALTER TABLE table3 ADD COLUMN e TEXT NOT NULL;</code>
 <title>Самостоятельно:</title>
 <text>Добавьте в таблицу tab1 столбец age (integer). Также Вы можете пройти тест по QR коду ниже:</text>
 <code/>
