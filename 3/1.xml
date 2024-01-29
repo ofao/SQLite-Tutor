@@ -23,7 +23,7 @@ address TEXT NOT NULL
 );</code>
 <text>В данном случае при помощи команды CREATE (оператора CREATE) мы создали таблицу, явно указав тип данных для каждого столбца, так же каждый столбец не может иметь пустого значения, а первый столбец id является суррогатным ключом таблицы (об этом свидетельствует ограничения PRIMARY KEY и AUTOINCREMENT).</text>
 <title>Создание таблицы с использованием квалификатора</title>
-<code>CREATE TABLE sq.table4 (
+<code>CREATE TABLE sq.table3 (
 a INTEGER NOT NULL,
 b TEXT UNIQUE NOT NULL,
 c REAL NOT NULL,
@@ -31,7 +31,7 @@ PRIMARY KEY(a)
 );</code>
 <title>Создание таблицы с проверкой на ее существование</title>
 <text>Когда вы создаете новые таблицы, то не всегда знаете структура базы данных, а, соответственно, не всегда знаете имена уже существующих таблиц, поэтому SQLite позволяет проверять имена таблиц на уникальность перед их созданием, для этого используется конструкция IF NOT EXISTS:</text>
-<code>CREATE TABLE IF NOT EXISTS table5 (
+<code>CREATE TABLE IF NOT EXISTS table4 (
 a INTEGER NOT NULL,
 b TEXT  UNIQUE NOT NULL,
 c REAL NOT NULL,
@@ -40,7 +40,7 @@ PRIMARY KEY(a)
 <text>Если таблицы с именем table5 в базе данных не будет, то SQLite создаст эту таблицу, если таблица table5 будет в базе данных, то таблица создана не будет.</text>
 <title>Создание временных таблиц</title>
 <text>Помимо обычных таблиц, SQLite позволяет создавать в базе данных временные таблицы. Временные таблицы в SQLite создаются в оперативной памяти и доступны только для того клиента, который эту таблицу создал, другие пользователи просто не увидят временную таблицу.</text>
-<code>CREATE TEMP TABLE table6 (
+<code>CREATE TEMP TABLE table5 (
 a INTEGER NOT NULL,
 b TEXT  UNIQUE NOT NULL,
 c REAL NOT NULL,
