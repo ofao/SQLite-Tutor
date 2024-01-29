@@ -4,4 +4,11 @@
 <picture>INSERT.png</picture>
 <text>После выражения INSERT INTO в скобках можно указать список столбцов через запятую, в которые надо добавлять данные, и в конце после слова VALUES скобках перечисляют добавляемые для столбцов значения.</text>
 <code>INSERT INTO table2 VALUES(1, 'Ivan', 'Ivanov', 28, 'Russia');</code>
+<text>Данная команда добавит новую строку в нашу таблицу table2. Столбец id имеет ограничение AUTOINCREMENT, значит нам необязательно указывать номер каждый раз:</text>
+<code>INSERT INTO table2(name, surname, age, addres) VALUES ('Andrey', 'Smirnov', 19, 'Russia');</code>
+<text>Для добавления сразу нескольких строк в таблицу можно указать значения через запятую:</text>
+<code>INSERT INTO table2(name, surname, age, addres)
+  VALUES ('Song', ' Wei', 22, 'China'),
+  ('Vladimir', 'Gusakov', 28, 'Belarus');
+</code>
 </document>
