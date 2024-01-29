@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <document>
 <text>Для обновления данных в SQLite применяется команда UPDATE. Она имеет следующий формальный синтаксис:</text>
 <picture>UPDATE.png</picture>
