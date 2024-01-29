@@ -1,5 +1,75 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <document>
-<text></text>
+<text>Оператор SELECT позволяет просматривать данные таблиц:</text>
 <picture>SELECT.png</picture>
+<text>Мы рассмотрим следующие операторы SELECT:
+DISTINCT;
+Операторы фильтрации (IN, NOT, BETWEEN, LIKE, GLOB, IS NULL);
+GROUP BY;
+HAVING;
+ORDER BY;
+LIMIT.</text>
+<title>DISTINCT</title>
+<text>Оператор DISTINCT позволяет выбрать уникальные данные по определенным столбцам.
+К примеру, разные товары могут иметь одних и тех же производителей, и, допустим, у нас следующая таблица товаров.
+Выберем всех производителей:</text>
+<code with_result='True'>SELECT company FROM products;</code>
+<text>Но при таком запросе производители повторяются. Теперь применим оператор DISTINCT для выборки уникальных значений:</text>
+<code with_result='True'>SELECT DISTINCT company FROM products;</code>
+<text>Также мы можем задавать выборку уникальных значений по нескольким столбцам:</text>
+<code with_result='True'>SELECT DISTINCT company, product_count FROM products;</code>
+<text>Здесь для выборки используются столбцы company и product_count. Из пяти строк только для двух строк эти столбцы имеют повторяющиеся значения. Поэтому в выборке будет 4 строки:</text>
+<title>Операторы фильтрации</title>
+<text>Для конкретизации выборки SQLite позволяет применять ряд операторов. Рассмотрим их.</text>
+<subtitle>IN</subtitle>
+<text>Оператор IN определяет набор значений, которые должен иметь столбец.
+Выберем из этой таблицы товары, у которых производитель либо Samsung, либо Xiaomi, либо Huawei:</text>
+<code with_result='True'>SELECT * FROM products
+WHERE company IN ('Samsung', 'Xiaomi', 'Huawei');</code>
+<subtitle>NOT</subtitle>
+<text>Оператор NOT, наоборот, позволяет выбрать все строки, не соответствуют критерию:</text>
+<code with_result='True'>SELECT * FROM products
+WHERE company NOT IN ('Samsung', 'Xiaomi', 'Huawei');</code>
+<subtitle>BETWEEN</subtitle>
+<text>Оператор BETWEEN определяет диапазон значений с помощью начального и конечного значения, которому должно соответствовать выражение.
+Например, получим все товары, у которых цена от 20 000 до 50 000 (начальное и конечное значения также включаются в диапазон):</text>
+<code with_result='True'>SELECT * FROM products
+WHERE price BETWEEN 20000 AND 50000;</code>
+<text>Если надо, наоборот, выбрать те строки, которые не попадают в данный диапазон, то добавляется оператор NOT:</text>
+<code>SELECT * FROM products
+WHERE price NOT BETWEEN 20000 AND 50000;</code>
+<text>Также можно использовать более сложные выражения. Например, получим товары по совокупной стоимости (цена * количество):</text>
+<code>SELECT * FROM products
+WHERE price * product_count BETWEEN 90000 AND 150000;</code>
+<subtitle>LIKE</subtitle>
+<text>Оператор LIKE принимает шаблон строки, которому должно соответствовать выражение.
+Для определения шаблона могут применяться ряд специальных символов подстановки:
+%: соответствует любой подстроке, которая может иметь любое количество символов, при этом подстрока может и не содержать ни одного символа
+Например, выражение WHERE name LIKE 'Galaxy%' соответствует таким значениям как "Galaxy Ace 2" или "Galaxy S7"
+_: соответствует любому одиночному символу
+Например, выражение WHERE name LIKE 'Galaxy S_' соответствует таким значениям как "Galaxy S7" или "Galaxy S8".
+Применим оператор LIKE:</text>
+<code with_result='True'>SELECT * FROM products
+WHERE name LIKE 'iPhone%';</code>
+<subtitle>GLOB</subtitle>
+<text>Оператор GLOB также позволяет проверить, соответствует ли строка некоторому выражению. GLOB имеет похожий синтаксис.
+  Оператор GLOB может использовать следующие специальные символы:
+*: соответствует любому количеству символов
+?: соответствует одному символу
+.: соответствует любому одиночному символу
+[символы]: соответствует любому одиночному символу из списка символов внутри скобок ([abc])
+[начальный_символ-конечный_символ]: соответствует любому одиночному символу из диапазона символов ([a-zA-Z0-9])
+^: этот символ используется в начале списка символов и соответствует любому символу, которое НЕ входит в список ([^0-9])
+</text>
+<code with_result='True'>SELECT * FROM products WHERE name GLOB 'iPhone [6-8]';</code>
+<text>Строка должна содержать либо iPhone 6, либо iPhone 7, либо iPhone 8</text>
+<code with_result='True'>SELECT * FROM products WHERE name GLOB 'iPhone 1[012]';</code>
+<text>Строка должна начинаться на iPhone 1, и затем идет одна цифра: 0, 1 или 2. Соответствует либо iPhone 10. либо iPhone 11, либо iPhone 12.</text>
+<subtitle>IS NULL</subtitle>
+  <text>Оператор IS NULL позволяет выбрать все строки, столбцы которых имеют значение NULL:</text>
+<code with_result='True'>SELECT * FROM products
+WHERE product_count IS NULL;</code>
+<text>С помощью добавления оператора NOT можно, наоброт, выбрать строки, столбцы которых не имеют значения NULL:</text>
+<code with_result='True'>SELECT * FROM products
+WHERE product_count IS NOT NULL;</code>
 </document>
