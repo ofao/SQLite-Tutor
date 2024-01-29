@@ -3,5 +3,5 @@
 <text>Для добавления данных в SQLite применяется команда INSERT, которая имеет следующий синтаксис:</text>
 <picture>INSERT.png</picture>
 <text>После выражения INSERT INTO в скобках можно указать список столбцов через запятую, в которые надо добавлять данные, и в конце после слова VALUES скобках перечисляют добавляемые для столбцов значения.</text>
-<code>INSERT INTO table1 VALUES();</code>
+<code>INSERT INTO table2 VALUES(1, 'Ivan', 'Ivanov', 28, 'Russia');</code>
 </document>
