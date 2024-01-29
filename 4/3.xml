@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+<text>Команда DELETE удаляет данные из БД. Она имеет следующий формальный синтаксис:</text>
+<picture>DELETE.png</picture>
+<text>Удалим из этой таблицы товары, у которых производитель - Huawei:</text>
+<code>DELETE FROM products
+WHERE company='Huawei';</code>
+<text>Если необходимо вовсе удалить все строки вне зависимости от условия, то условие можно не указывать:</text>
+<code>DELETE FROM products;</code>
+</document>
