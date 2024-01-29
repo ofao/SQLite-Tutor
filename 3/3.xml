@@ -5,7 +5,7 @@
 <text>Сначала создадим таблицу</text>
 <code>CREATE TABLE table1 (a,b,c,d);</code>
 <title>Переименовать таблицу</title>
-<code>ALTER TABLE table1 RENAME TO table2;</code>
+<code>ALTER TABLE table1 RENAME TO table6;</code>
 <text>Убедимся, что переименование произошло успешно, пользуясь всё той же .tables.</text>
 <title>Добавить новый столбец</title>
 <code>ALTER TABLE table2 ADD COLUMN e;</code>
