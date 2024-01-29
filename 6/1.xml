@@ -19,4 +19,12 @@ FOREIGN KEY (id_product) REFERENCES Products(id_product) );</code>
 <title>Реляционная алгебра в запросах</title>
 <text>Самый простой вид связи - FULL JOIN:</text>
 <code with_result='True'>SELECT * FROM Products FULL JOIN ON Products.id_product = Orders.id_product;</code>
+<text>INNER JOIN:</text>
+<code with_result='True'>SELECT * FROM Products INNER JOIN ON Products.id_product = Orders.id_product;</code>
+<text>LEFT JOIN:</text>
+<code with_result='True'>SELECT * FROM Products LEFT JOIN ON Products.id_product = Orders.id_product;</code>
+<text>RIGHT JOIN:</text>
+<code with_result='True'>SELECT * FROM Products RIGHT JOIN ON Products.id_product = Orders.id_product;</code>
+<text>CROSS JOIN:</text>
+<code with_result='True'>SELECT * FROM Products CROSS JOIN ON Products.id_product = Orders.id_product;</code>
 </document>
