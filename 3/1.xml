@@ -56,3 +56,4 @@ sex - text;
 sal - real.</text>
 <code/>
 <answer>CREATE TABLE tab1(id integer, name text, pro text, sex text, sal real)</answer>
+</document>
