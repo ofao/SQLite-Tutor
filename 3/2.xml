@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+<text>Команда DROP в SQLite3 позволяет нам удалять объекты базы данных. При помощи команды DROP  в SQLite3 мы можем удалить:
+таблицу (TABLE); 
+индекс (INDEX);
+триггер (TRIGGER);
+представление (VIEW);
+базу данных (DATABASE).
+Команда DROP TABLE в SQLite3 позволяет удалять таблицы из нашей базы данных. Синтаксис оператора DROP TABLE в SQLite3 прост до безобразия.</text>
+<picture>DROP.png</picture>
+<text>Пример:</text>
+<title>Простая форма удаления таблицы</title>
+<code>DROP TABLE tbl_nm;</code>
+<title>Удаление таблицы с проверкой на существование таблицы</title>
+<code>DROP TABLE IF EXISTS table_name;</code>
+<title>Удаление таблицы с указанием квалификатора</title>
+<text>Думаю, вы уже догадались, что конструкция IF EXIST заставляет сперва проверить SQLite3, а существует ли данная таблица вообще, прежде чем попытаться применить команду DROP TABLE. Мы также можем явно указать базу данных, из которой хотим удалить таблицу, для этого ставим точку перед именем таблицы и указываем имя базы данных.</text>
+<code>DROP TABLE name-database.name-schema;</code>
+<title>Самостоятельно:</title>
+<text>Удалите талицу tab1, созданную вами в прошлом уроке.</text>
+<code/>
+<answer>DROP TABLE tab1;</answer>
+</document>
