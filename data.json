@@ -1,0 +1,40 @@
+{"theme": "Light",
+"obuch_passed": false,
+"Создание базы данных": {
+	"Создание и хранение БД": false, 
+	"Метакоманды": false,
+	"Тест": false
+}, 
+"Связи и внешние ключи": {
+	"Ограничения": false, 
+	"Первичный и внешний ключ": false,
+	"Тест": false
+}, 
+"Создание таблиц": {
+	"CREATE": false,
+	"DROP": false,
+	"ALTER": false,
+	"Тест": false
+},
+"Заполнение таблиц": {
+	"INSERT": false,
+	"UPDATE": false,
+	"DELETE": false,
+	"Тест": false
+}, 
+"Запросы": {
+	"SELECT": false,
+	"Тест": false
+}, 
+"Реляционная алгебра": {
+	"Операции": false,
+	"Тест": false
+}, 
+"Триггеры": {
+	"Создание триггеров": false,
+	"Тест": false
+},
+"databases": [
+	"sq.db"
+]
+}
