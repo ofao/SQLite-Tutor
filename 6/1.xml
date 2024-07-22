@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+<text>Существует большое множест различных способов присоединения таблиц, но в SQLite поддерживаются только следующие:</text>
+<picture>JOIN.png</picture>
+<text>После оператора JOIN идет название второй таблицы, из которой надо добавить данные в выборку. Перед JOIN может использоваться необязательное ключевое слово INNER. Его наличие или отсутствие ни на что не влияет. Затем после ключевого слова ON указывается условие соединения. Это условие устанавливает, как две таблицы будут сравниваться. В большинстве случаев для соединения применяется первичный ключ главной таблицы и внешний ключ зависимой таблицы.
+</text>
+<title>Подготовка</title>
+<text>Для начала давайте создадим 2 таблицы: товары и заказы и свяжем их:</text>
+<code>CREATE TABLE Products (
+id_product INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT NOT NULL, 
+price INTEGER NOT NULL,
+quantity INTEGER NOT NULL CHECK (quantity > 0) );</code>
+<code>CREATE TABLE Orders (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+id_product TEXT NOT NULL, 
+quantity INTEGER NOT NULL CHECK (quantity > 0),
+FOREIGN KEY (id_product) REFERENCES Products(id_product) );</code>
+<title>Реляционная алгебра в запросах</title>
+<text>Самый простой вид связи - INNER JOIN:</text>
+<code with_result='True'>SELECT * FROM Products INNER JOIN Orders ON Products.id_product = Orders.id_product;</code>
+<text>LEFT JOIN:</text>
+<code with_result='True'>SELECT * FROM Products LEFT JOIN Orders ON Products.id_product = Orders.id_product;</code>
+<text>CROSS JOIN:</text>
+<code with_result='True'>SELECT * FROM Products CROSS JOIN Orders ON Products.id_product = Orders.id_product;</code>
+</document>

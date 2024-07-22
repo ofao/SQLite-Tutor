@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+<text>При определении столбцов и таблиц для них можно задать ограничения. Ограничения позволяют настроить поведение столбцов и таблиц. Ограничения столбцов указываются после типа столбца. Ограничения таблицы указываются после определения всех столбцов. Рассмотрим, какие ограничения столбцов мы можем использовать.</text>
+<title>AUTOINCREMENT</title>
+<text>Ограничение AUTOINCREMENT позволяет указать, что значение столбца будет автоматически увеличиваться при добавлении новой строки. Данное ограничение работает для столбцов, которые представляют тип INTEGER с ограничением PRIMARY KEY:</text>
+<code>CREATE TABLE users
+  (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    age INTEGER
+  );</code>
+<text>
+В данном случае значение столбца id каждой новой добавленной строки будет увеличиваться на единицу.
+</text>
+<code>INSERT INTO users(name, age) values ('Alex', 25);</code>
+<text>Мы добавили в нашу таблицу запись, для которой номер определился автоматически.</text>
+<title>UNIQUE</title>
+<text>Ограничение UNIQUE указывает, что столбец может хранить только уникальные значения. В данном случае столбец email, который представляет телефон пользователя, может хранить только уникальные значения. И мы не сможем добавить в таблицу две строки, у которых значения для этого столбца будет совпадать.</text>
+<code>CREATE TABLE users2
+  (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    age INTEGER,
+    email TEXT UNIQUE
+  );</code>
+<text>Также мы можем определить это ограничение на уровне таблицы. В данном случае уникальность значений устанавлена сразу для двух столбцов - name и email.</text>
+<code>CREATE TABLE users3
+  (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    age INTEGER,
+    email TEXT,
+    UNIQUE (name, email)
+  );</code>
+<text>Теперь при попытке добавить записи с одинаковыми name и email выведется ошибка:</text>
+<code>INSERT INTO users3(name, age, email) VALUES ('Alex', 25, 'alex@email.com'), ('Alex', 37, 'alex1234@email.com');</code>
+<title>NULL И NOT NULL</title>
+<subtitle>NULL и "" не одно и то же!</subtitle>
+<text>По умолчанию любой столбец, если он не представляет первичный ключ, может принимать значение NULL, то есть фактически отсутствие формального значения. Но если мы хотим запретить подобное поведение и установить, что столбец обязательно должен иметь какое-либо значение, то для него следует установить ограничение NOT NULL. В данном случае столбец name не допускает значение NULL.</text>
+<code>CREATE TABLE users4
+  (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    age INTEGER
+  );</code>
+<text>Мы указали, что поле name не может быть пустым. Следующий код вызовет ошибку, так как это поле для заполнения обязательно:</text>
+<code>INSERT INTO users4 VALUES (1, NULL, 18);</code>
+<text>Даже если мы пропустим столбец name, мы все равно вызовем ошибку:</text>
+<code>INSERT INTO users4(id, age) VALUES (2, 15);</code>
+<title>DEFAULT</title>
+<text>
+Ограничение DEFAULT определяет значение по умолчанию для столбца. Если при добавлении данных для столбца не будет предусмотрено значение, то для него будет использоваться значение по умолчанию.
+Здесь столбец age в качестве значения по умолчанию имеет число 18.
+</text>
+<code>DROP TABLE users;</code>
+<code>CREATE TABLE users
+  (
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    age INTEGER DEFAULT 18
+  );</code>
+<title>CHECK</title>
+<text>
+Ограничение CHECK задает ограничение для диапазона значений, которые могут храниться в столбце. Для этого после CHECK указывается в скобках условие, которому должен соответствовать столбец или несколько столбцов. Например, возраст пользователей не может быть меньше 0 или больше 100:
+</text>
+<code>DROP TABLE users;</code>
+<code>CREATE TABLE users
+  (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL CHECK(name !=''),
+    age INTEGER NOT NULL CHECK(age &gt; 0 AND age &lt; 100)
+  );</code>
+<text>
+Кроме проверки возраста здесь также проверяется, что столбец name не может иметь пустую строку в качестве значения (пустая строка не эквивалентна значению NULL).
+Для соединения условий используется ключевое слово AND. Условия можно задать в виде операций сравнения больше (&gt;), меньше (&lt;), не равно (!=).
+Также CHECK можно использовать на уровне таблицы:
+</text>
+<code>DROP TABLE users;</code>
+<code>CREATE TABLE users
+  (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    age INTEGER NOT NULL,
+    CHECK ((age &gt; 0 AND age &lt; 100) AND (name !=''))
+  );</code>
+<title>CONSTRAINT</title>
+<text>
+  С помощью оператора CONSTRAINT можно задать имя для ограничений. Они указываются после ключевого слова CONSTRAINT перед ограничениями на уровне таблицы.
+  В данном случае ограничение для PRIMARY KEY называется users_pk, для UNIQUE - user_phone_uq, а для CHECK - user_age_chk. Смысл установки имен ограничений заключается в том, что впоследствии через эти имена мы сможем управлять ограничениями - удалять или изменять их.
+</text>
+<code>DROP TABLE users;</code>
+<code>CREATE TABLE users
+  (
+    id INTEGER,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    age INTEGER NOT NULL,
+    CONSTRAINT users_pk PRIMARY KEY(id),
+    CONSTRAINT user_email_uq UNIQUE(email),
+    CONSTRAINT user_age_chk CHECK(age &gt; 0 AND age &lt; 100)
+  );</code>
+</document>

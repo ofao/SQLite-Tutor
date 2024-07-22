@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+<question>
+<text>Выберите верный запрос для создания временной таблицы table1(a)</text>
+<variant>CREATE TABLE IF NOT EXISTS table1(a);</variant>
+<variant correct='true'>CREATE TEMP TABLE table1(a);</variant>
+<variant correct='true'>CREATE TEMPORARY TABLE table1(a);</variant>
+<variant>CREATE TABLE sq.table1(a);</variant>
+</question>
+<question>
+<text>В данном примере:
+
+CREATE TABLE order(
+
+order_id INTEGER NOT NULL,
+
+user_id INTEGER,
+
+PRIMARY KEY (order_id),
+
+FOREIGN KEY (user_id) REFERENCES users(id));</text>
+<variant>внешний ключ - user_id (привязан к полю order_id текущей таблицы), первичный ключ - order_id</variant>
+<variant correct='true'>внешний ключ - user_id (привязан к полю id таблицы users), первичный ключ - order_id</variant>
+<variant>внешний ключ - order_id (привязан к полю id таблицы users), первичный ключ - user_id</variant>
+</question>
+<question>
+<text>Как расшифровывается SQL?</text>
+<variant correct='true'>Structured Query Language</variant>
+<variant>Strict Question Line</variant>
+<variant>Strong Question Language</variant>
+</question>
+<question>
+<text>Для создания новой таблицы в существующей базе данных используется команда</text>
+<variant correct='true'>CREATE TABLE</variant>
+<variant>NEW TABLE</variant>
+<variant>MAKE TABLE</variant>
+</question>
+<question>
+<text>Для удаления объектов базы данных используется команда</text>
+<variant correct='true'>DROP</variant>
+<variant>ALTER</variant>
+<variant>DELETE</variant>
+</question>
+<question>
+<text>Для переименования таблиц и добавления в них столбцов служит команда</text>
+<variant correct='true'>ALTER TABLE</variant>
+<variant>DROP TABLE</variant>
+<variant>EDIT TABLE</variant>
+</question>
+</document>

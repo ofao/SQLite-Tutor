@@ -13,7 +13,7 @@ package.domain = org.test
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpeg,jpg,kv,atlas,db,txt,pickle
+source.include_exts = py,png,jpeg,jpg,db,txt,xml,json
 
 # (list) List of inclusions using pattern matching
 #source.include_patterns = assets/*,images/*.png
@@ -37,14 +37,14 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,sqlite3,kivymd,kivymd-extensions,kivymd-extensions.akivymd
+requirements = python3,kivy,sqlite3,kivymd,kivymd-extensions,kivymd-extensions.akivymd,sqlparse,sql-metadata,sql_metadata
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
 # requirements.source.kivy = ../../kivy
 
 # (str) Presplash of the application
-#presplash.filename = %(source.dir)s/data/presplash.png
+presplash.filename = logo.jpg
 
 # (str) Icon of the application
 icon.filename = database.png
@@ -68,7 +68,6 @@ osx.kivy_version = 2.1.0
 osx.kivymd_version = 1.1.1
 osx.kivymd-extensions_version = 1.0.0
 osx.kivymd-extensions.akivymd_version = .2.6
-osx.pyperclip_version = 1.8.2
 #
 # Android specific
 #
@@ -95,7 +94,7 @@ fullscreen = 0
 
 # (list) Permissions
 # (See https://python-for-android.readthedocs.io/en/latest/buildoptions/#build-options-1 for all the supported syntaxes and properties)
-#android.permissions = android.permission.INTERNET,android.permission.WRITE_EXTERNAL_STORAGE
+android.permissions = android.permission.INTERNET,android.permission.WRITE_EXTERNAL_STORAGE,permission.READ_EXTERNAL_STORAGE
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
